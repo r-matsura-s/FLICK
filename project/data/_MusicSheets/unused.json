@@ -1,0 +1,407 @@
+{
+    "version": 1,
+    "meta": {
+        "title": "unused_music",
+        "subTitle": "-",
+        "bpm": 198.0,
+        "music": "unused_music.wav",
+        "musicVolume": 1.0,
+        "offsetType": 1,
+        "beatsPerMeasure": 4,
+        "ticksPerBeat": 480
+    },
+    "timing": [
+        {
+            "type": "bpm",
+            "measure": 1,
+            "numerator": 1.0,
+            "denominator": 1,
+            "bpm": 198.0
+        }
+    ],
+    "difficulties": [
+        {
+            "difficulty": 2,
+            "level": 12,
+            "notes": [
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 1,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.15,
+                    "measure": 1,
+                    "numerator": 2.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.25,
+                    "measure": 1,
+                    "numerator": 3.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.4,
+                    "measure": 1,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HOLD_1",
+                    "laneStart": 0.5,
+                    "measureStart": 2,
+                    "numeratorStart": 1.0,
+                    "denominatorStart": 4,
+                    "laneEnd": -0.5,
+                    "measureEnd": 3,
+                    "numeratorEnd": 1.0,
+                    "denominatorEnd": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": -0.5,
+                    "measure": 1,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HOLD_1",
+                    "laneStart": 0.5,
+                    "measureStart": 4,
+                    "numeratorStart": 1.0,
+                    "denominatorStart": 4,
+                    "laneEnd": -0.5,
+                    "measureEnd": 5,
+                    "numeratorEnd": 1.0,
+                    "denominatorEnd": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 5,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.1,
+                    "measure": 5,
+                    "numerator": 2.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.2,
+                    "measure": 5,
+                    "numerator": 3.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.3,
+                    "measure": 5,
+                    "numerator": 4.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HOLD_1",
+                    "laneStart": 0.4,
+                    "measureStart": 6,
+                    "numeratorStart": 1.0,
+                    "denominatorStart": 4,
+                    "laneEnd": 0,
+                    "measureEnd": 7,
+                    "numeratorEnd": 1.0,
+                    "denominatorEnd": 4
+                },
+                {
+                    "type": "HOLD_2",
+                    "laneStart": -0.4,
+                    "measureStart": 7,
+                    "numeratorStart": 1.0,
+                    "denominatorStart": 4,
+                    "laneEnd": 0,
+                    "measureEnd": 7,
+                    "numeratorEnd": 3.0,
+                    "denominatorEnd": 4
+                },
+                {
+                    "type": "HOLD_1",
+                    "laneStart": 0.4,
+                    "measureStart": 8,
+                    "numeratorStart": 1.0,
+                    "denominatorStart": 4,
+                    "laneEnd": 0.3,
+                    "measureEnd": 9,
+                    "numeratorEnd": 3.0,
+                    "denominatorEnd": 4
+                },
+                {
+                    "type": "HOLD_1",
+                    "laneStart": -0.4,
+                    "measureStart": 8,
+                    "numeratorStart": 1.0,
+                    "denominatorStart": 4,
+                    "laneEnd": -0.3,
+                    "measureEnd": 9,
+                    "numeratorEnd": 3.0,
+                    "denominatorEnd": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 1.25,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 1.5,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 1.75,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 2.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 2.25,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 2.5,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 2.75,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 3.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 3.25,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 3.5,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 3.75,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 4.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 4.25,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 4.5,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 8,
+                    "numerator": 4.75,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 1.25,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 1.5,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 1.75,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 2.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 2.25,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 2.5,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 2.75,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 3.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 3.25,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 3.5,
+                    "denominator": 4
+                },
+                {
+                    "type": "HEALING",
+                    "lane": 0.0,
+                    "measure": 9,
+                    "numerator": 3.75,
+                    "denominator": 4
+                },
+                {
+                    "type": "TAP_1",
+                    "lane": 0.0,
+                    "measure": 10,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "TAP_1",
+                    "lane": 0.0,
+                    "measure": 11,
+                    "numerator": 1.0,
+                    "denominator": 4
+                },
+                {
+                    "type": "TAP_1",
+                    "lane": 0.0,
+                    "measure": 12,
+                    "numerator": 1.0,
+                    "denominator": 4
+                }
+            ],
+            "events": [
+                {
+                    "id": "flash",
+                    "params": { "color": "white" },
+                    "measure": 1,
+                    "numerator": 1.0,
+                    "denominator": 4
+                }
+            ]
+        },
+        {
+            "difficulty": 1,
+            "level": 8,
+            "notes": [
+                {
+                    "type": "TAP_1",
+                    "lane": 0.0,
+                    "measure": 1,
+                    "numerator": 1.0,
+                    "denominator": 4
+                }
+            ],
+            "events": [
+
+            ]
+        }
+    ],
+    "notes": [
+
+    ],
+    "events": [
+
+    ]
+}
