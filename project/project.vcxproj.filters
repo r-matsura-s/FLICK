@@ -86,6 +86,9 @@
     <ClCompile Include="Source\StaticMesh.cpp">
       <Filter>StaticMesh</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NotesMetaData.cpp">
+      <Filter>PlayScene\Notes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -197,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="Source\StaticMesh.h">
       <Filter>StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NotesMetaData.h">
+      <Filter>PlayScene\Notes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

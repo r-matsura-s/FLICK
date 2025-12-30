@@ -21,6 +21,8 @@ namespace
 
 	// ヒーリングノーツの距離判定半径
 	static const float HEALING_NOTE_RADIUS = 0.3f;
+
+	static const int READY_COUNT = 4;
 }
 
 // キー配置はここ
@@ -279,6 +281,8 @@ void NotesManager::Draw()
 	{
 		Renderer::Text(Vector2(-100, -300), Color::White(), "COMBO:" + std::to_string(combo_count_));
 	}
+
+	Renderer::Text(Vector2(400, -300), Color::White(), meta_data_.title_);
 }
 
 
@@ -288,14 +292,35 @@ void NotesManager::UpdateStateLoad()
 	std::string music_name = "MarbleBlue";
 	CreateNotes("data/_MusicSheets/" + music_name + ".json");//ここでリーク???
 
+	ready_timer_ = GetBeatTime();
+	ready_count_ = 0;
+
 	ChangeState(InGameState::READY);
 }
 
 void NotesManager::UpdateStateReady()
 {
-	// 曲の再生開始
-	sound_manager_->PlayBGM(SoundPlayType::ONCE);
-	ChangeState(InGameState::PLAY);
+	ready_timer_ -= Time::DeltaTime();
+	if (ready_timer_ <= 0)
+	{
+		ready_count_++;
+		if (ready_count_ <= READY_COUNT)
+		{
+			sound_manager_->PlaySE("guid");
+			ready_timer_ = GetBeatTime();
+			if (ready_count_ == READY_COUNT)
+			{
+				ready_timer_ = GetBeatTime() * 4.0f;
+			}
+		}
+
+		if (ready_count_ == READY_COUNT + 1)
+		{
+			// 曲の再生開始
+			sound_manager_->PlayBGM(SoundPlayType::ONCE);
+			ChangeState(InGameState::PLAY);
+		}
+	}
 }
 
 void NotesManager::UpdateStatePlay()
@@ -693,18 +718,11 @@ void NotesManager::CreateNotes(const std::string& file_name)
 	{
 		// ファイル内容を文字列に読み込む
 		json json_obj = json::parse(ifs);
+		meta_data_.SetToJsonObj(json_obj);
+		current_bpm_ = meta_data_.bpm_;
 
-		// メタデータ
-		auto title =		json_obj["title"].get<std::string>();
-		auto sub_title =	json_obj["subTitle"].get<std::string>();
-		auto music =		json_obj["music"].get<std::string>();
-		current_bpm_ =		json_obj["bpm"].get<float>();
-		auto volume =		json_obj["volume"].get<float>();
-		auto offset =		json_obj["offset"].get<float>();
-		auto beat =			json_obj["beat"].get<int>();
-
-		sound_manager_->LoadSound(music, ".wav", SoundType::MUSIC, 2);
-		sound_manager_->SetBGMVolume(volume);
+		sound_manager_->LoadSound(meta_data_.music_, ".wav", SoundType::MUSIC, 2);
+		sound_manager_->SetBGMVolume(meta_data_.volume_);
 
 		// ノーツデータの読み込み
 		for (auto itr = json_obj["notes"].begin(); itr != json_obj["notes"].end(); itr++)
@@ -724,6 +742,12 @@ void NotesManager::CreateNotes(const std::string& file_name)
 			notes_list_.push_back(
 				new Notes(Notes::ToNoteType((*itr)["type"]), be_lane, be_time, en_lane, en_time)
 			);
+		}
+
+		// 座標の初期化
+		for (Notes* note : notes_list_)
+		{
+			note->UpdateVerticalPos();
 		}
 
 	}PARSE_CATCH

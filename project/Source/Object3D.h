@@ -30,7 +30,9 @@ public:
 	/// </summary>
 	virtual void Draw() override;
 
-protected:
+	inline void SetStaticMeshFlag(bool flag) { static_mesh_ = flag; }
+
+//protected:
 	Transform transform_;// ˆÊ’uA‰ñ“]AŠg‘å—¦‚È‚Ç
 
 private:

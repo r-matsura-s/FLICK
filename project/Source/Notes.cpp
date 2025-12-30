@@ -80,8 +80,7 @@ void Notes::UpdateMove()
 {
 	// ノーツの位置更新
 	current_time_ += Time::DeltaTime();
-	position_.z = LaneLeapVerticalRate(arrive_time_ - current_time_);
-	end_position_.z = LaneLeapVerticalRate(hold_end_time_ - current_time_);
+	UpdateVerticalPos();
 }
 
 void Notes::UpdateOnHold()
@@ -301,6 +300,7 @@ NotesType Notes::ToNoteType(const std::string& note_type)
 	};
 
 #if (TRUE)
+	// 存在するENUMか確認する
 	auto itr = STR_TO_ENUM.find(note_type);
 	if (itr != STR_TO_ENUM.end()) {
 		return itr->second;
@@ -309,6 +309,13 @@ NotesType Notes::ToNoteType(const std::string& note_type)
 	DebugLog("警告!：[" + note_type + "] は定義されていません");
 	return NotesType::HEALING;
 #else
+	auto itr = STR_TO_ENUM.find(note_type);
 	return itr->second;
 #endif
+}
+
+void Notes::UpdateVerticalPos()
+{
+	position_.z = LaneLeapVerticalRate(arrive_time_ - current_time_);
+	end_position_.z = LaneLeapVerticalRate(hold_end_time_ - current_time_);
 }

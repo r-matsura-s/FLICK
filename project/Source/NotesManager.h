@@ -1,6 +1,7 @@
 #pragma once
 #include "../Library/GameObject.h"
 #include <vector>
+#include "NotesMetaData.h"
 
 class Notes;
 class SoundManager;
@@ -65,12 +66,17 @@ private:
 	void JudgeNotes();
 
 	inline void ChangeState(InGameState next_state) { ingame_state_ = next_state; }
+	inline float GetBeatTime() const { return (60.0f / current_bpm_); }
 
 	// ノーツのリスト
 	std::vector<Notes*> notes_list_;
 	
 	SoundManager* sound_manager_;
 
+	float ready_timer_ = 0.0f;
+	int ready_count_ = 0;
+
+	NotesMetaData meta_data_;
 	float current_bpm_ = 120.0f;
 	int combo_count_ = 0;
 	InGameState ingame_state_ = InGameState::LOAD;

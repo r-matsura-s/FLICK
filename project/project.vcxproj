@@ -166,6 +166,7 @@
     <ClInclude Include="Source\Notes.h" />
     <ClInclude Include="Source\NotesLine.h" />
     <ClInclude Include="Source\NotesManager.h" />
+    <ClInclude Include="Source\NotesMetaData.h" />
     <ClInclude Include="Source\Object3D.h" />
     <ClInclude Include="Source\Screen.h" />
     <ClInclude Include="Source\PlayScene.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="Source\Notes.cpp" />
     <ClCompile Include="Source\NotesLine.cpp" />
     <ClCompile Include="Source\NotesManager.cpp" />
+    <ClCompile Include="Source\NotesMetaData.cpp" />
     <ClCompile Include="Source\Object3D.cpp" />
     <ClCompile Include="Source\PlayScene.cpp" />
     <ClCompile Include="Source\SceneFactory.cpp" />

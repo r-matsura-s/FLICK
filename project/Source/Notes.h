@@ -65,6 +65,8 @@ public:
 	// StringToEnum
 	static NotesType ToNoteType(const std::string& note_type);
 
+	void UpdateVerticalPos();
+
 private:
 	void UpdateMove();
 	void UpdateOnHold();

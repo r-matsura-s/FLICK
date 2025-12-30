@@ -9,6 +9,8 @@ namespace
 {
 	static const Vector3 CAMERA_DEFAULT_POSITION = Vector3(0.0f, 550.0f, -550.0f);
 	static const float CAMERA_DEFAULT_ANGLE = 35.0f;
+
+	static const float BACKGROUND_ROTATE_SPEED = 0.00015f * DegToRad;
 }
 
 GameManager::GameManager()
@@ -16,7 +18,8 @@ GameManager::GameManager()
 	SetBackgroundColor(127, 157, 200);
 	SetCameraPositionAndAngle(CAMERA_DEFAULT_POSITION, CAMERA_DEFAULT_ANGLE * DegToRad, 0.0f, 0.0f);
 
-	new Object3D("Sky_Daylight01", Transform(Vector3(), Vector3(), Vector3::One() * 3));
+	back_ground_ = new Object3D("Sky_Daylight01", Transform(Vector3(), Vector3(), Vector3::One() * 3));
+	back_ground_->SetStaticMeshFlag(false);
 
 	new LaneManager();
 	new NotesManager();
@@ -30,6 +33,7 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
+	back_ground_->transform_.rotation += Vector3(0, BACKGROUND_ROTATE_SPEED, 0) / Time::DeltaTime();
 }
 
 void GameManager::Draw()
