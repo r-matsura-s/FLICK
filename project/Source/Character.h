@@ -1,19 +1,16 @@
 #pragma once
-#include "../Library/GameObject.h"
+#include "Object3D.h"
 
-class Character : public GameObject
+class Character : public Object3D
 {
 public:
 	Character();
 	virtual ~Character();
 
 	void Update() override;
-	void Draw() override;
 
 protected:
 	virtual void MoveUpdate();
-
-	Vector3 position;
 
 private:
 	float radius;
