@@ -390,6 +390,12 @@ void NotesManager::UpdateStatePlay()
 
 	// ”»’èˆ—
 	JudgeNotes();
+
+	// Šy‹È‚ÌÄ¶‚ªI‚í‚Á‚½
+	if (!sound_manager_->IsPlayingBGM())
+	{
+		ChangeState(InGameState::FINISH);
+	}
 }
 
 void NotesManager::UpdateStatePause()
@@ -398,6 +404,8 @@ void NotesManager::UpdateStatePause()
 
 void NotesManager::UpdateStateFinish()
 {
+	// ‰¼
+	SceneManager::ChangeScene("TITLE");
 }
 
 void NotesManager::JudgeNotes()

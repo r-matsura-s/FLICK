@@ -95,6 +95,19 @@ public:
 	void Play(int handle, SoundPlayType play_type);
 
 	/// <summary>
+	/// 指定したハンドルとサウンド種類に対応する音声が現在再生中かどうかを判定します。
+	/// </summary>
+	/// <param name="handle">音声を識別するハンドル。</param>
+	/// <returns>指定の音声が再生中であれば true を返し、そうでなければ false を返します。</returns>
+	inline bool IsPlaying(int handle) const { return DxLib::CheckSoundMem(handle); }
+
+	/// <summary>
+	/// BGMが再生中かどうかを返します。
+	/// </summary>
+	/// <returns>BGMが再生中であれば true を、そうでなければ false を返します。</returns>
+	inline bool IsPlayingBGM() const { return IsPlaying(bgm_handle_); }
+
+	/// <summary>
 	/// BGMのハンドルを取得します。
 	/// </summary>
 	/// <returns>BGMのハンドルを返します。</returns>
