@@ -75,6 +75,7 @@ private:
 	void SetTapSound();
 	void SetUpdateAction();
 	void SetDrawAction();
+	void SetNoteImage();
 
 	void DrawTap(Color color) const;
 	void DrawHold(const Vector3& begin, const Vector3& end, Color color) const;
@@ -93,6 +94,8 @@ private:
 	float arrive_time_;				// ノーツ到達時間(秒)
 	float current_time_ = 0.0f;		// 経過時間(秒)
 
+	int note_handle_ = -1;			// 通常ノーツ画像ハンドル
+	int note_overlay_handle_ = -1;	// 通常ノーツ[2]画像ハンドル
 	int flick_handle_ = -1;			// フリックノーツ画像ハンドル
 
 	bool judged_ = false;			// 判定済みか

@@ -435,6 +435,16 @@ namespace DxLib
 		int Alpha() const {
 			return (int)(a * 255.0f);
 		}
+
+		// COLOR_U8‚É•ÏŠ·‚µ‚½’l‚ğŠl“¾
+		COLOR_U8 ToU8() const { 
+			COLOR_U8 ret{};
+			ret.a = (unsigned char)(a * 255.0f);
+			ret.r = (unsigned char)(r * 255.0f);
+			ret.g = (unsigned char)(g * 255.0f);
+			ret.b = (unsigned char)(b * 255.0f);
+			return ret;
+		}
 	};
 
 	// ƒJƒ‰[‚Ì‰ÁZ

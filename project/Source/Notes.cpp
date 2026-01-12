@@ -26,16 +26,11 @@ Notes::Notes(double horizontal, double arrive_time, NotesType type)
 	hold_ended_ = false;
 	end_sound_played_ = true;
 	
-	// フリック画像の読み込み
-	if (type == NotesType::FLICK_L)
-		flick_handle_ = ResourceLoader::LoadGraph("data/texture/f_L.png");
-	else if(type == NotesType::FLICK_R)
-		flick_handle_ = ResourceLoader::LoadGraph("data/texture/f_R.png");
-
 	// 忘れずに各セッターを呼ぶ
 	SetTapSound();
 	SetUpdateAction();
 	SetDrawAction();
+	SetNoteImage();
 }
 
 // ホールドノーツ専用コンストラクタ
@@ -63,6 +58,7 @@ Notes::Notes(NotesType type, double begin_horizontal, double begin_arrive_time, 
 	SetTapSound();
 	SetUpdateAction();
 	SetDrawAction();
+	SetNoteImage();
 }
 
 Notes::~Notes()
@@ -238,9 +234,70 @@ void Notes::SetDrawAction()
 	}
 }
 
+void Notes::SetNoteImage()
+{
+	// 画像の読み込み
+	switch (type_)
+	{
+	case NotesType::TAP_1:
+	case NotesType::TAP_2:
+		note_handle_ = ResourceLoader::LoadGraph("data/texture/note.png");
+		note_overlay_handle_ = ResourceLoader::LoadGraph("data/texture/note_overley.png");
+		break;
+	case NotesType::HOLD_1:
+	case NotesType::HOLD_2:
+		note_handle_ = ResourceLoader::LoadGraph("data/texture/note.png");
+		note_overlay_handle_ = ResourceLoader::LoadGraph("data/texture/note_overley.png");
+		//hold_handle_ = ResourceLoader::LoadGraph("data/texture/hold.png");
+		break;
+	case NotesType::FLICK_L:
+		flick_handle_ = ResourceLoader::LoadGraph("data/texture/f_L.png");
+		break;
+	case NotesType::FLICK_R:
+		flick_handle_ = ResourceLoader::LoadGraph("data/texture/f_R.png");
+		break;
+	case NotesType::HEALING:
+		//healing_handle_ = ResourceLoader::LoadGraph("data/texture/healing.png");
+		break;
+	}
+}
+
+static VERTEX3D GetVertex3D(const Vector3& pos, const Vector3& norm, const Color& dif, const Color& spc, const Vector2& uv, const Vector2& suv)
+{
+	return { pos, norm, dif.ToU8(), spc.ToU8(), uv.x, uv.y, suv.x, suv.y };
+}
+
 void Notes::DrawTap(Color color) const
 {
-	DrawSphere3D(position_, 40.0f, 8, color.RGB16(), color.RGB16(), TRUE);
+	//DrawSphere3D(position_, 40.0f, 8, color.RGB16(), color.RGB16(), TRUE);
+
+	Vector2 size = Vector2(2.0f, 1.0f) * 30.0f;
+	// 頂点情報
+	VERTEX3D vertexs[6] = 
+	{
+		GetVertex3D(position_ + Vector3(-size.x, 0.0f, -size.y), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 0.0f), Vector2::Zero()),
+		GetVertex3D(position_ + Vector3(-size.x, 0.0f,  size.y), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 1.0f), Vector2::Zero()),
+		GetVertex3D(position_ + Vector3( size.x, 0.0f, -size.y), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 0.0f), Vector2::Zero()),
+		
+		GetVertex3D(position_ + Vector3(-size.x, 0.0f,  size.y), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 1.0f), Vector2::Zero()),
+		GetVertex3D(position_ + Vector3( size.x, 0.0f,  size.y), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 1.0f), Vector2::Zero()),
+		GetVertex3D(position_ + Vector3( size.x, 0.0f, -size.y), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 0.0f), Vector2::Zero()),
+	};
+	// 普通に描画
+	DrawPolygon3D(vertexs, 2, note_handle_, TRUE);
+	// 暗いので加算する
+	Renderer::SetBlendMode_Add(200);
+	DrawPolygon3D(vertexs, 2, note_handle_, TRUE);
+	// 少し上に移動
+	for (int i = 0; i < 6; i++)
+	{
+		vertexs[i].pos.y += 0.001f;
+		vertexs[i].dif = { 0xff, 0xff ,0xff, 0xff };
+	}
+	// オーバーレイ画像の表示
+	//Renderer::SetBlendMode_Add(128);
+	DrawPolygon3D(vertexs, 2, note_overlay_handle_, TRUE);
+	Renderer::ResetBlendMode();
 }
 
 void Notes::DrawHold(const Vector3& begin, const Vector3& end, Color color) const
