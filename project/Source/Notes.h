@@ -38,12 +38,12 @@ public:
 
 	void PlayTapSE() const;
 
-	void SetJudged(bool judged) { judged_ = judged; }
+	void SetJudged(bool judged);
 
 	// ホールド用
-	void SetHoldStarted(bool started) { hold_started_ = started; }
-	void SetHolding(bool holding) { is_holding_ = holding; }
-	void SetHoldEnded(bool ended) { hold_ended_ = ended; }
+	inline void SetHoldStarted(bool started) { hold_started_ = started; }
+	inline void SetHolding(bool holding) { is_holding_ = holding; }
+	inline void SetHoldEnded(bool ended) { hold_ended_ = ended; }
 
 	inline NotesType Type()		const { return type_; }
 	inline float Horizontal()	const { return horizontal_rate_; }
@@ -77,7 +77,7 @@ private:
 	void SetDrawAction();
 	void SetNoteImage();
 
-	void DrawTap(Color color) const;
+	void DrawTap(const Vector3& pos, const Color& color) const;
 	void DrawHold(const Vector3& begin, const Vector3& end, Color color) const;
 	void DrawFlick() const;
 	void DrawDamage() const;

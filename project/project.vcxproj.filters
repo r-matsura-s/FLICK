@@ -89,6 +89,12 @@
     <ClCompile Include="Source\NotesMetaData.cpp">
       <Filter>PlayScene\Notes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MusicSelectManager.cpp">
+      <Filter>TitleScene\MusicSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MusicTrack.cpp">
+      <Filter>TitleScene\MusicSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -204,6 +210,15 @@
     <ClInclude Include="Source\NotesMetaData.h">
       <Filter>PlayScene\Notes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\JsonTitleCollector.h">
+      <Filter>TitleScene\MusicSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MusicSelectManager.h">
+      <Filter>TitleScene\MusicSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MusicTrack.h">
+      <Filter>TitleScene\MusicSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -244,6 +259,9 @@
     </Filter>
     <Filter Include="StaticMesh">
       <UniqueIdentifier>{13576506-9522-43e7-aa53-4c28e699b1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TitleScene\MusicSelect">
+      <UniqueIdentifier>{b36ad72d-8997-49d2-a6bb-c024e33b4a93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

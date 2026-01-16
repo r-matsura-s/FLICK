@@ -6,11 +6,11 @@
 namespace
 {
 	// 結果表示のオフセット位置
-	static const Vector2 OFFSET_POS = Vector2(0.0f, -80.0f);	
+	static const Vector2 OFFSET_POS = Vector2(0.0f, 0.0f);	
 	// ノーツの座標から変換するための倍率
 	static const float TO_SCREEN_HORIZONTAL = 250.0f;
 	// 画像の拡大率
-	static const float IMAGE_SCALE = 0.4f;
+	static const float IMAGE_SCALE = 0.3f;
 	// 判定画像の数
 	static const int JUDGE_MAX = 5;
 }

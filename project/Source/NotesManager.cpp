@@ -235,6 +235,7 @@ NotesManager::NotesManager()
 	#pragma endregion 
 
 	combo_count_ = 0;
+	is_auto_play_ = true;
 }
 
 NotesManager::~NotesManager()
@@ -279,7 +280,7 @@ void NotesManager::Draw()
 	// コンボ数が1以上のときのみ表示
 	if (combo_count_ != 0) 
 	{
-		Renderer::Text(Vector2(-100, -300), Color::White(), "COMBO:" + std::to_string(combo_count_));
+		//Renderer::Text(Vector2(-100, -300), Color::White(), "COMBO:" + std::to_string(combo_count_));
 	}
 
 	Renderer::Text(Vector2(400, -300), Color::White(), meta_data_.title_);
@@ -432,6 +433,88 @@ void NotesManager::JudgeNotes()
 			// (まだ判定するには早いノーツ)
 			continue;
 		}
+
+		// --- 自動プレイ処理 ---
+		if (is_auto_play_)
+		{
+			if (note->Type() == NotesType::DAMAGE || note->Type() == NotesType::HEALING)
+			{
+				//passする
+			}
+			else
+			{
+
+				// ホールドノーツの自動処理
+				if (note->IsHoldNote())
+				{
+					// 開始前なら開始を自動で行う（PERFECT ウィンドウ内で）
+					if (!note->HoldStarted())
+					{
+						float diff = note->ArriveTime() - note->CurrentTime();
+						if (std::abs(diff) <= PERFECT_WINDOW)
+						{
+							// ホールド開始を自動で行う（終了時に判定）
+							note->SetHoldStarted(true);
+							note->SetHolding(true);
+
+							// 開始の判定表示（PERFECT）
+							OnJudged(note, JudgeResult::PERFECT);
+							// 開始時点では SetJudged(true) しない（終了判定があるため）
+						}
+						else if (diff < -GOOD_WINDOW)
+						{
+							// 開始判定を逃した場合はミス（通常の挙動に合わせる）
+							note->SetJudged(true);
+							note->SetHoldEnded(true);
+							OnJudged(note, JudgeResult::MISS);
+						}
+					}
+					// 開始済みで終了前なら、終了を自動で処理
+					else if (note->HoldStarted() && !note->HoldEnded())
+					{
+						float hold_end_diff = note->HoldEndDiff();
+						// 終了タイミングが PERFECT ウィンドウ内なら自動でリリースして PERFECT
+						if (std::abs(hold_end_diff) <= PERFECT_WINDOW)
+						{
+							note->SetJudged(true);
+							note->SetHoldEnded(true);
+							note->SetHolding(false);
+							OnJudged(note, JudgeResult::PERFECT);
+							continue;
+						}
+						// ウィンドウを過ぎてミスするなら通常通りミス扱い
+						else if (hold_end_diff < -GOOD_WINDOW)
+						{
+							note->SetJudged(true);
+							note->SetHoldEnded(true);
+							note->SetHolding(false);
+							OnJudged(note, JudgeResult::MISS);
+							continue;
+						}
+						// それ以外は自動で押し続ける
+						note->SetHolding(true);
+					}
+
+					// ホールドの自動処理はここまで（他の判定へ進めない）
+					continue;
+				}
+
+				// ヒーリング・通常・フリックなどの非ホールド系は、PERFECT ウィンドウ内で自動判定
+				{
+					float diff = std::abs(note->ArriveTime() - note->CurrentTime());
+					if (diff <= PERFECT_WINDOW)
+					{
+						// ノーツを判定済みにする
+						note->SetJudged(true);
+						// 常に PERFECT
+						OnJudged(note, JudgeResult::PERFECT);
+					}
+					// 自動プレイのときは、判定を行ったら次のノーツへ
+					continue;
+				}
+			}
+		}
+		// --- 自動プレイ処理ここまで ---
 
 		// ------------------------------------------------
 		// 1. ホールドノーツの処理

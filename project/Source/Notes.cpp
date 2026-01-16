@@ -127,6 +127,16 @@ void Notes::SetUpdateAction()
 	update_action_ += [this] { UpdateGuidSound(); };
 }
 
+void Notes::SetJudged(bool judged)
+{
+	judged_ = judged;
+	if (judged_)
+	{
+		// 判定されたら描画処理をクリア
+		draw_action_.Clear();
+	}
+}
+
 // ここからサウンド関連
 
 void Notes::PlayTapSE() const
@@ -181,7 +191,7 @@ void Notes::SetTapSound()
 
 void Notes::Draw()
 {
-	if (judged_) return;
+	//if (judged_) return;
 
 	// 描画処理
 	draw_action_.Invoke();
@@ -192,11 +202,11 @@ void Notes::SetDrawAction()
 	switch (type_)
 	{
 	case NotesType::TAP_1:
-		draw_action_ += [this] { this->DrawTap(Color::Red()); };
+		draw_action_ += [this] { this->DrawTap(position_, Color::Red()); };
 		break;
 
 	case NotesType::TAP_2:
-		draw_action_ += [this] { this->DrawTap(Color::Green()); };
+		draw_action_ += [this] { this->DrawTap(position_, Color::Green()); };
 		break;
 
 	case NotesType::HOLD_1:
@@ -262,32 +272,17 @@ void Notes::SetNoteImage()
 	}
 }
 
-static VERTEX3D GetVertex3D(const Vector3& pos, const Vector3& norm, const Color& dif, const Color& spc, const Vector2& uv, const Vector2& suv)
-{
-	return { pos, norm, dif.ToU8(), spc.ToU8(), uv.x, uv.y, suv.x, suv.y };
-}
-
-void Notes::DrawTap(Color color) const
+void Notes::DrawTap(const Vector3& pos, const Color& color) const
 {
 	//DrawSphere3D(position_, 40.0f, 8, color.RGB16(), color.RGB16(), TRUE);
 
-	Vector2 size = Vector2(2.0f, 1.0f) * 30.0f;
 	// 頂点情報
-	VERTEX3D vertexs[6] = 
-	{
-		GetVertex3D(position_ + Vector3(-size.x, 0.0f, -size.y), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 0.0f), Vector2::Zero()),
-		GetVertex3D(position_ + Vector3(-size.x, 0.0f,  size.y), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 1.0f), Vector2::Zero()),
-		GetVertex3D(position_ + Vector3( size.x, 0.0f, -size.y), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 0.0f), Vector2::Zero()),
-		
-		GetVertex3D(position_ + Vector3(-size.x, 0.0f,  size.y), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 1.0f), Vector2::Zero()),
-		GetVertex3D(position_ + Vector3( size.x, 0.0f,  size.y), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 1.0f), Vector2::Zero()),
-		GetVertex3D(position_ + Vector3( size.x, 0.0f, -size.y), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 0.0f), Vector2::Zero()),
-	};
+	std::vector<VERTEX3D> vertexs = GetVertexArray(pos, Vector2(2.0f, 1.0f) * 30.0f, color, Color::White());
 	// 普通に描画
-	DrawPolygon3D(vertexs, 2, note_handle_, TRUE);
+	DrawPolygon3D(&vertexs[0], 2, note_handle_, TRUE);
 	// 暗いので加算する
 	Renderer::SetBlendMode_Add(200);
-	DrawPolygon3D(vertexs, 2, note_handle_, TRUE);
+	DrawPolygon3D(&vertexs[0], 2, note_handle_, TRUE);
 	// 少し上に移動
 	for (int i = 0; i < 6; i++)
 	{
@@ -296,22 +291,39 @@ void Notes::DrawTap(Color color) const
 	}
 	// オーバーレイ画像の表示
 	//Renderer::SetBlendMode_Add(128);
-	DrawPolygon3D(vertexs, 2, note_overlay_handle_, TRUE);
+	DrawPolygon3D(&vertexs[0], 2, note_overlay_handle_, TRUE);
 	Renderer::ResetBlendMode();
 }
 
 void Notes::DrawHold(const Vector3& begin, const Vector3& end, Color color) const
-{
-	DrawCapsule3D(begin, end, 20.0f, 8, color.RGB16(), color.RGB16(), TRUE);
+{	
+	// 頂点情報
+	VERTEX3D hold[6] =
+	{
+		GetVertex3D(begin + Vector3(-1.8f * 30.0f, 0.0f, 0.0f), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 0.0f), Vector2::Zero()),
+		GetVertex3D(begin + Vector3( 1.8f * 30.0f, 0.0f, 0.0f), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 1.0f), Vector2::Zero()),
+		GetVertex3D(end   + Vector3(-1.8f * 30.0f, 0.0f, 0.0f), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 0.0f), Vector2::Zero()),
+
+		GetVertex3D(begin + Vector3( 1.8f * 30.0f, 0.0f, 0.0f), Vector3::UnitY(), color, Color::White(), Vector2(0.0f, 1.0f), Vector2::Zero()),
+		GetVertex3D(end   + Vector3( 1.8f * 30.0f, 0.0f, 0.0f), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 1.0f), Vector2::Zero()),
+		GetVertex3D(end   + Vector3(-1.8f * 30.0f, 0.0f, 0.0f), Vector3::UnitY(), color, Color::White(), Vector2(1.0f, 0.0f), Vector2::Zero()),
+	};
+
+	//DrawCapsule3D(begin, end, 20.0f, 8, color.RGB16(), color.RGB16(), TRUE);
+	DrawPolygon3D(hold, 2, note_handle_, TRUE);
 	if (is_holding_)
 	{
 		Renderer::SetBlendMode_Add(170);
-		DrawCapsule3D(begin, end, 20.5f, 8, Color::White16(), Color::White16(), TRUE);
-		Renderer::ResetBlendMode();
+		//DrawCapsule3D(begin, end, 20.5f, 8, Color::White16(), Color::White16(), TRUE);
+		DrawPolygon3D(hold, 2, note_handle_, TRUE);
+		//Renderer::ResetBlendMode();
 	}
-	DrawSphere3D(end, 40.0f, 8, color.RGB16(), color.RGB16(), TRUE);
-	DrawSphere3D(begin, 40.0f, 8, color.RGB16(), color.RGB16(), TRUE);
 	
+	//DrawSphere3D(end, 40.0f, 8, color.RGB16(), color.RGB16(), TRUE);
+	DrawTap(end, color);
+	//DrawSphere3D(begin, 40.0f, 8, color.RGB16(), color.RGB16(), TRUE);
+	DrawTap(begin, color);
+
 #if (FALSE)
 	Vector2 pos = WorldPosToScreenPos(position_);
 	DrawFormatStringF(pos.x, pos.y, 0x00ff00, "%.2f", (hold_end_time_ - current_time_));

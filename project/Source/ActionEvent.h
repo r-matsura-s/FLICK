@@ -24,12 +24,14 @@ public:
     /// リストに追加した関数を呼ぶ
     /// </summary>
     /// <param name="...args">ActionEvent宣言時の型<></param>
-    inline void Invoke(Args... args) const 
+    inline void Invoke(Args... args)  
     {
+		is_invoking_ = true;
         for (const auto& func : callback_list_) 
         {
             func(args...);
         }
+		is_invoking_ = false;
     }
 
     /// <summary>
@@ -40,9 +42,34 @@ public:
         return length_; 
     }
 
+    /// <summary>
+	/// Invoke中か取得
+    /// </summary>
+    inline bool IsInvoking() const
+    {
+        return is_invoking_;
+	}
+
+    /// <summary>
+    /// 登録されているコールバックを全て削除する
+    /// </summary>
+    inline void Clear()
+    {
+#if (_DEBUG)
+        if (is_invoking_)
+        {
+            OutputDebugStringA("ActionEvent::Clear() - Invoke中にClearは推奨されていません。予期せぬ処理になる場合があります。\n");
+        }
+#endif
+
+        callback_list_.clear();
+        length_ = 0;
+    }
+
 private:
     std::vector<std::function<void(Args...)>> callback_list_;
     int length_ = 0;
+	bool is_invoking_ = false;
 };
 
 // サンプル
@@ -53,16 +80,22 @@ int main()
     Player player;
 
     // 引数付きイベントに、引数なしメソッドを登録（ラムダでラップ）
-    onScore += [&player](int score) {
-        player.ShowStatus(); // 引数は無視して呼び出す
-    };
+    onScore += [&player](int score) { player.ShowStatus(); };
 
 	// 引数付きイベントに、引数付き処理を登録
-    onScore += [](int score) {
-        std::cout << "Scored: " << score << std::endl;
-    };
+    onScore += [](int score) { std::cout <<  score << std::endl; };
 
 	onScore.Invoke(100); // player.ShowStatus()、"Scored: 100"、が呼ばれる
+}
+
+Player::Init() 
+{
+    // クラス内でメソッドを登録する場合
+
+    ActionEvent<> actionEvent;
+    actionEvent += [this] { this->ShowStatus(); };
+
+	actionEvent.Invoke();
 }
 
 */

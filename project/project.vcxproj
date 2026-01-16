@@ -161,8 +161,11 @@
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\GameManager.h" />
     <ClInclude Include="Source\InputManager.h" />
+    <ClInclude Include="Source\JsonTitleCollector.h" />
     <ClInclude Include="Source\JudgedText.h" />
     <ClInclude Include="Source\LaneManager.h" />
+    <ClInclude Include="Source\MusicSelectManager.h" />
+    <ClInclude Include="Source\MusicTrack.h" />
     <ClInclude Include="Source\Notes.h" />
     <ClInclude Include="Source\NotesLine.h" />
     <ClInclude Include="Source\NotesManager.h" />
@@ -196,6 +199,8 @@
     <ClCompile Include="Source\InputManager.cpp" />
     <ClCompile Include="Source\JudgedText.cpp" />
     <ClCompile Include="Source\LaneManager.cpp" />
+    <ClCompile Include="Source\MusicSelectManager.cpp" />
+    <ClCompile Include="Source\MusicTrack.cpp" />
     <ClCompile Include="Source\Notes.cpp" />
     <ClCompile Include="Source\NotesLine.cpp" />
     <ClCompile Include="Source\NotesManager.cpp" />

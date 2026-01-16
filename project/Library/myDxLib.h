@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <math.h>
 #include <string>
+#include <vector>
 #include "assert.h"
 #include "../Source/Screen.h"
 
@@ -470,5 +471,27 @@ namespace DxLib
 		return size;
 	};
 	
-	
+	inline VERTEX3D GetVertex3D(const Vector3& pos, const Vector3& norm, const Color& dif, const Color& spc, const Vector2& uv, const Vector2& suv)
+	{
+		return { pos, norm, dif.ToU8(), spc.ToU8(), uv.x, uv.y, suv.x, suv.y };
+	}
+
+	inline std::vector<VERTEX3D> GetVertexArray(const Vector3& centor_pos, const Vector2& poly_size, const Color& diff, const Color& spc)
+	{
+		const Vector3 norm = Vector3::UnitY();
+		
+		// í∏ì_èÓïÒ
+		std::vector<VERTEX3D> ret;
+		ret.resize(6);
+		
+		ret[0] = GetVertex3D(centor_pos + Vector3(-poly_size.x, 0.0f, -poly_size.y), norm, diff, spc, Vector2(0.0f, 0.0f), Vector2::Zero());
+		ret[1] = GetVertex3D(centor_pos + Vector3(-poly_size.x, 0.0f,  poly_size.y), norm, diff, spc, Vector2(0.0f, 1.0f), Vector2::Zero());
+		ret[2] = GetVertex3D(centor_pos + Vector3( poly_size.x, 0.0f, -poly_size.y), norm, diff, spc, Vector2(1.0f, 0.0f), Vector2::Zero());
+
+		ret[3] = GetVertex3D(centor_pos + Vector3(-poly_size.x, 0.0f,  poly_size.y), norm, diff, spc, Vector2(0.0f, 1.0f), Vector2::Zero());
+		ret[4] = GetVertex3D(centor_pos + Vector3( poly_size.x, 0.0f,  poly_size.y), norm, diff, spc, Vector2(1.0f, 1.0f), Vector2::Zero());
+		ret[5] = GetVertex3D(centor_pos + Vector3( poly_size.x, 0.0f, -poly_size.y), norm, diff, spc, Vector2(1.0f, 0.0f), Vector2::Zero());
+
+		return ret;
+	}
 };

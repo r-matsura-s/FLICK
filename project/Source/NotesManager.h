@@ -80,4 +80,6 @@ private:
 	float current_bpm_ = 120.0f;
 	int combo_count_ = 0;
 	InGameState ingame_state_ = InGameState::LOAD;
+
+	bool is_auto_play_ = false;
 };
