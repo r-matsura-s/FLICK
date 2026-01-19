@@ -38,5 +38,5 @@ void MusicTrack::DrawTitle() const
 	Renderer::Text(Vector2(0, 30 * 0), Color(), "" + meta_data_->title_);
 	Renderer::Text(Vector2(0, 30 * 1), Color(), "" + meta_data_->sub_title_);
 	Renderer::Text(Vector2(0, 30 * 2), Color(), "BPM:" + std::to_string(meta_data_->bpm_));
-	Renderer::Text(Vector2(0, 30 * 3), Color(), "“ïˆÕ“x:–¢ŽÀ‘•‚Å‚·...");
+	Renderer::Text(Vector2(0, 30 * 3), Color(), "ƒŒƒxƒ‹:" + std::to_string(meta_data_->level_));
 }

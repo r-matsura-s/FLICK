@@ -11,4 +11,5 @@ void NotesMetaData::SetToJsonObj(const nlohmann::json& json_obj)
 	volume_ = json_obj["volume"].get<float>();
 	offset_ = json_obj["offset"].get<float>();
 	beat_ = json_obj["beat"].get<int>();
+	level_ = json_obj["level"].get<int>();
 }

@@ -6,6 +6,9 @@
 
 class NotesMetaData;
 
+/// <summary>
+/// 選択できる楽曲クラス。GameObject継承
+/// </summary>
 class MusicTrack : public GameObject
 {
 public:

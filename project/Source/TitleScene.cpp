@@ -12,7 +12,16 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
-	music_select_manager_->Update();
+	switch (state_)
+	{
+	case TitleState::TITLE_LOGO:
+		break;
+	case TitleState::SELECT_MUSIC:
+		music_select_manager_->Update();
+		break;
+	default:
+		break;
+	}
 
 	if (CheckHitKey(KEY_INPUT_P)) {
 		SceneManager::ChangeScene("PLAY");
@@ -25,7 +34,16 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	music_select_manager_->Draw();
+	switch (state_)
+	{
+	case TitleState::TITLE_LOGO:
+		break;
+	case TitleState::SELECT_MUSIC:
+		music_select_manager_->Draw();
+		break;
+	default:
+		break;
+	}
 
 	extern const char* Version();
 	DrawString(0, 20, Version(), GetColor(255,255,255));

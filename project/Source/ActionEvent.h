@@ -35,6 +35,27 @@ public:
     }
 
     /// <summary>
+    /// 指定インデックスのコールバックのみを呼ぶ
+    /// インデックスが範囲外の場合は何もしない（早期リターン）
+    /// コールバックに引数がある場合でも渡せるように Args... を受け取って転送する
+    /// </summary>
+    inline void InvokeAt(int index, Args... args)
+    {
+        // 安全な範囲チェック：負の値および大きすぎる値は無視する
+        if (index < 0 || index >= Length())
+        {
+            return;
+        }
+
+		is_invoking_ = true;
+        if (const auto& func = callback_list_[index])
+        {
+            func(args...);
+        }
+        is_invoking_ = false;
+    }
+
+    /// <summary>
     /// 登録されている要素数を獲得
     /// </summary>
     inline int Length() const 
@@ -86,6 +107,9 @@ int main()
     onScore += [](int score) { std::cout <<  score << std::endl; };
 
 	onScore.Invoke(100); // player.ShowStatus()、"Scored: 100"、が呼ばれる
+
+	// インデックス0 のコールバックのみ呼ぶ
+	onScore.InvokeAt(0, 200);
 }
 
 Player::Init() 

@@ -20,4 +20,5 @@ public:
 	float volume_ = 1.0f;	// 再生ボリューム
 	float offset_ = 0.0f;	// 再生オフセット秒
 	int beat_ = 4;			// 曲の拍子
+	int level_ = 7;			// 難易度レベル
 };

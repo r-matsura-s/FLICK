@@ -1,11 +1,12 @@
 {
-    "title": "MarbleBlue",
+    "title": "MarbleBlue.",
     "subTitle": "---",
     "music": "MarbleBlue",
     "bpm": 198.0,
-    "volume": 0.42,
+    "volume": 0.52,
     "offset": 0.0,
     "beat": 4,
+    "level": 10,
     "notes": [
         {
             "type": "HEALING",
