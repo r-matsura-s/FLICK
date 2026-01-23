@@ -15,17 +15,22 @@ void TitleScene::Update()
 	switch (state_)
 	{
 	case TitleState::TITLE_LOGO:
+		if (true)
+		{
+			state_ = TitleState::SELECT_MUSIC;
+		}
 		break;
 	case TitleState::SELECT_MUSIC:
 		music_select_manager_->Update();
+		if (CheckHitKey(KEY_INPUT_P))
+		{
+			SceneManager::ChangeScene("PLAY");
+		}
 		break;
 	default:
 		break;
 	}
 
-	if (CheckHitKey(KEY_INPUT_P)) {
-		SceneManager::ChangeScene("PLAY");
-	}
 	if (CheckHitKey(KEY_INPUT_ESCAPE)) {
 		SceneManager::Exit();
 	}

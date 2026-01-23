@@ -385,6 +385,6 @@ NotesType Notes::ToNoteType(const std::string& note_type)
 
 void Notes::UpdateVerticalPos()
 {
-	position_.z = LaneLeapVerticalRate(arrive_time_ - current_time_);
-	end_position_.z = LaneLeapVerticalRate(hold_end_time_ - current_time_);
+	position_.z = LaneLeapVerticalRate(arrive_time_ - current_time_) * high_spin_rate_;
+	end_position_.z = LaneLeapVerticalRate(hold_end_time_ - current_time_) * high_spin_rate_;
 }

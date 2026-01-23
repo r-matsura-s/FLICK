@@ -1,5 +1,6 @@
 #pragma once
 #include "../Library/GameObject.h"
+#include "../Library/Transform.h"
 
 class MusicTrack;
 
@@ -16,6 +17,10 @@ public:
 	void Draw();
 
 private:
+	void OnTrackChange();
+
 	std::vector<MusicTrack*> music_tracks_;
+	Transform transform_;
 	int select_index_ = 0;
+	float high_spin_rate_ = 0.5f;
 };

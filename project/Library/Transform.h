@@ -82,6 +82,16 @@ public:
 		return Vector3(0, 0, -1) * MGetRotationZXY(rotation);
 	}
 
+	Vector3 GetPositionParent() const {
+		Vector3 result = position;
+		const Transform* pParent = parent;
+		while (pParent != nullptr) {
+			result += pParent->position;
+			pParent = pParent->parent;
+		}
+		return result;
+	}
+
 	/// <summary>
 	/// ターゲット座標を向くように回転を設定します。
 	/// </summary>

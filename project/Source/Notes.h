@@ -39,6 +39,7 @@ public:
 	void PlayTapSE() const;
 
 	void SetJudged(bool judged);
+	inline void SetHighSpin(float hs_rate) { high_spin_rate_ = hs_rate; }
 
 	// ホールド用
 	inline void SetHoldStarted(bool started) { hold_started_ = started; }
@@ -93,6 +94,7 @@ private:
 
 	float arrive_time_;				// ノーツ到達時間(秒)
 	float current_time_ = 0.0f;		// 経過時間(秒)
+	float high_spin_rate_ = 0.75f;	// ハイスピノーツの速度倍率
 
 	int note_handle_ = -1;			// 通常ノーツ画像ハンドル
 	int note_overlay_handle_ = -1;	// 通常ノーツ[2]画像ハンドル

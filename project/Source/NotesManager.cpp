@@ -290,8 +290,14 @@ void NotesManager::Draw()
 void NotesManager::UpdateStateLoad()
 {
 	//Json配置
-	std::string music_name = "MarbleBlue";
-	CreateNotes("data/_MusicSheets/" + music_name + ".json");//ここでリーク???
+	std::string music_name = "MarbleBlue_EX";
+	float hs_rate = 0.75f;
+	if (NotesMetaDataContext* selected = FindGameObject<NotesMetaDataContext>())
+	{
+		music_name = selected->meta_data_.sub_title_;// 選択された譜面データ名を取得
+		hs_rate = selected->high_spin_rate_;// 選択されたハイスピを取得
+		CreateNotes("data/_MusicSheets/" + music_name + ".json", hs_rate);//ここでリーク???
+	}
 
 	ready_timer_ = GetBeatTime();
 	ready_count_ = 0;
@@ -793,7 +799,7 @@ void NotesManager::OnJudged(const Notes* note, JudgeResult result)
 #define PARSE_CATCH catch (nlohmann::detail::exception ex) { MessageBox(NULL, _TEXT("JSONのパースに失敗しました。\n"), std::to_string(ex.id).c_str() , MB_OK);exit(0); }
 
 #ifdef PARSE_CATCH
-void NotesManager::CreateNotes(const std::string& file_name)
+void NotesManager::CreateNotes(const std::string& file_name, float hs_rate)
 {
 	// コンパイルエラー >>> v145(?)がないとエラーになるかも
 
@@ -838,6 +844,7 @@ void NotesManager::CreateNotes(const std::string& file_name)
 		// 座標の初期化
 		for (Notes* note : notes_list_)
 		{
+			note->SetHighSpin(hs_rate);
 			note->UpdateVerticalPos();
 		}
 

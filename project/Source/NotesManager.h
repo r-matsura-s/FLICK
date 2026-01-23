@@ -62,7 +62,7 @@ private:
 	void UpdateStateFinish();
 
 	void OnJudged(const Notes* note, JudgeResult result);
-	void CreateNotes(const std::string& file_name);
+	void CreateNotes(const std::string& file_name, float hs_rate);
 	void JudgeNotes();
 
 	inline void ChangeState(InGameState next_state) { ingame_state_ = next_state; }
