@@ -29,7 +29,10 @@ ResultData::ResultData()
 
 ResultData::~ResultData()
 {
-	SAFE_DELETE(played_track_);
+	if (delete_played_track_)
+	{
+		DeleteNotesMeta();
+	}
 }
 
 void ResultData::DrawScore(const Vector2& pos) const
@@ -37,11 +40,12 @@ void ResultData::DrawScore(const Vector2& pos) const
 	Renderer::Text(pos, Color::White(), "SCORE: " + std::to_string(score_));
 }
 
-void ResultData::SetNotesMeta(const NotesMetaData& data)
+void ResultData::SetNotesMeta(const NotesMetaData& data, bool dont_delete)
 {
 	if (played_track_ == nullptr)
 	{
 		played_track_ = new MusicTrack(data);
+		delete_played_track_ = !dont_delete;
 	}
 }
 

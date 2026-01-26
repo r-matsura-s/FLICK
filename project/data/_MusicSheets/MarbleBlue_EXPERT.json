@@ -1,9 +1,10 @@
 {
     "title": "MarbleBlue.",
-    "subTitle": "MarbleBlue_EX",
+    "subTitle": "---",
+    "className": "EXPERT",
     "music": "MarbleBlue",
     "bpm": 198.0,
-    "volume": 0.52,
+    "volume": 0.4,
     "offset": 0.0,
     "beat": 4,
     "level": 10,

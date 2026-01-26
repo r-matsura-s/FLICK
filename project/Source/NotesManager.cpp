@@ -220,13 +220,13 @@ void NotesManager::Draw()
 void NotesManager::UpdateStateLoad()
 {
 	//Json配置
-	std::string music_name = "MarbleBlue_EX";
+	std::string music_name = "MarbleBlue_EXPERT.json";
 	float hs_rate = 0.75f;
 	if (NotesMetaDataContext* selected = FindGameObject<NotesMetaDataContext>())
 	{
-		music_name = selected->meta_data_.sub_title_;// 選択された譜面データ名を取得
+		music_name = selected->meta_data_.GetJsonFileName();// 選択された譜面データ名を取得
 		hs_rate = selected->high_spin_rate_;// 選択されたハイスピを取得
-		CreateNotes("data/_MusicSheets/" + music_name + ".json", hs_rate);//ここでリーク???
+		CreateNotes("data/_MusicSheets/" + music_name, hs_rate);//ここでリーク???
 	}
 
 	ready_timer_ = GetBeatTime();
@@ -351,6 +351,7 @@ void NotesManager::UpdateStateFinish()
 	if (true)
 	{
 		// プレイデータを送る
+		result_data_->SetNotesMeta(meta_data_);
 		FindGameObject<ResultDataConnector>()->SetResultData(*result_data_);
 		
 		SceneManager::ChangeScene("RESULT");

@@ -16,6 +16,8 @@ public:
 	void Update();
 	void Draw();
 
+	static const char* GetMusicSheetsPath();
+
 private:
 	void OnTrackChange();
 

@@ -1,12 +1,13 @@
 {
     "title": "Shooting Star",
-    "subTitle": "ShootingStar_EX",
+    "subTitle": "ERROR",
+    "className": "EASY",
     "music": "ShootingStar",
     "bpm": 198.0,
     "volume": 0.52,
     "offset": 0.0,
     "beat": 4,
-    "level": 8,
+    "level": 2,
     "notes": [
         {
             "type": "HEALING",

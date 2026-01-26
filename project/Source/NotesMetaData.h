@@ -14,9 +14,11 @@ public:
 
 	void SetToJsonObj(const nlohmann::json& json_obj);
 	int GetLevelToIndex() const;
+	std::string GetJsonFileName() const;
 
 	std::string title_;		// 曲のタイトル
 	std::string sub_title_;	// サブタイトル等
+	std::string class_name_;// 難易度タイプ名
 	std::string music_;		// 音声ファイル名
 	float bpm_ = 120.0f;	// 基本BPM
 	float volume_ = 1.0f;	// 再生ボリューム

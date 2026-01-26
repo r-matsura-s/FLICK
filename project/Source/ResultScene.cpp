@@ -1,7 +1,9 @@
 #include "ResultScene.h"
+#include "ResultBoardManager.h"
 
 ResultScene::ResultScene()
 {
+	new ResultBoardManager();
 }
 
 ResultScene::~ResultScene()

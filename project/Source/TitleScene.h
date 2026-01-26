@@ -24,7 +24,14 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void UpdateFog();
+
 private:
 	TitleState state_ = TitleState::TITLE_LOGO;
 	MusicSelectManager* music_select_manager_;
+	
+	Color current_fog_;
+	Color begin_fog_;
+	Color target_fog_;
+	float fog_tween_rate_ = -1.0f;
 };

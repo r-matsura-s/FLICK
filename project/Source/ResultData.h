@@ -11,8 +11,8 @@ public:
 	void DrawScore(const Vector2& pos) const;
 
 	// ‚±‚±‚Ånew‚·‚é
-	void SetNotesMeta(const NotesMetaData& data);
-	inline NotesMetaData* GetNotesMeta() const { return played_track_->GetMetaData(); }
+	void SetNotesMeta(const NotesMetaData& data, bool dont_delete = true);
+	void DeleteNotesMeta() { SAFE_DELETE(played_track_); }
 
 	void OnJudge(int judge_enum, int current_combo);
 
@@ -25,4 +25,6 @@ public:
 private:
 	void AddJudgeCount(int judge_enum);
 	void ComperSetMaxCombo(int current_combo);
+
+	bool delete_played_track_ = false;
 };

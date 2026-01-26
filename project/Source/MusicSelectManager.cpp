@@ -13,13 +13,13 @@ namespace
 MusicSelectManager::MusicSelectManager()
 {
 	JsonTitleCollector collector;
-	collector.LoadTitlesFromDirectory(MUSIC_SHEETS);
+	collector.LoadTitlesFromDirectory(MusicSelectManager::GetMusicSheetsPath());
 	for (int i = 0; i <  collector.titles.size(); i++)
 	{
 		MusicTrack* track = new MusicTrack(collector.titles[i]);
 		music_tracks_.push_back(track);
 
-		track->LoadJacketImage(MUSIC_SHEETS);
+		track->LoadJacketImage(MusicSelectManager::GetMusicSheetsPath());
 		track->transform_.SetParent(&transform_);
 		track->transform_.SetPosition(Vector3(i * TRACK_SPACING, 0.0f, 0.0f));
 		// •`‰æˆ—“o˜^
@@ -99,6 +99,11 @@ void MusicSelectManager::Draw()
 	{
 		track->Draw();
 	}
+}
+
+const char* MusicSelectManager::GetMusicSheetsPath()
+{
+	return MUSIC_SHEETS;
 }
 
 void MusicSelectManager::OnTrackChange()

@@ -2,6 +2,7 @@
 #include "ResultDataConnector.h"
 #include "../Library/Renderer2D.h"
 #include "NotesMetaData.h"
+#include "MusicSelectManager.h"
 
 namespace
 {
@@ -13,10 +14,13 @@ namespace
 ResultBoardManager::ResultBoardManager()
 {
 	play_result_data_ = FindGameObject<ResultDataConnector>()->GetResultData();
+	play_result_data_.played_track_->transform_.parent = nullptr;// なんか残っていたので削除
+	play_result_data_.played_track_->LoadJacketImage(MusicSelectManager::GetMusicSheetsPath());
 }
 
 ResultBoardManager::~ResultBoardManager()
 {
+	play_result_data_.DeleteNotesMeta();
 }
 
 void ResultBoardManager::Update()
@@ -40,9 +44,9 @@ void ResultBoardManager::Draw()
 	// 判定カウントの描画
 	for (int i = 0; i < 5; i++)
 	{
-		std::string str[5] = { "Perfect", "Great", "Good", "Bad", "Miss" };
-		DrawFormatString(640, 420 + (i * 30), GetColor(255, 255, 255), 
-			"JUDGE:%s %d", str[i].c_str(), view_result_data_.judge_counts_[i]);
+		std::string str[5] = { "Perfect", "Great  ", "Good   ", "Bad    ", "Miss   " };
+		DrawFormatString(300, 420 + (i * 30), GetColor(255, 255, 255), 
+			"%s : %d", str[i].c_str(), view_result_data_.judge_counts_[i]);
 	}
 }
 
