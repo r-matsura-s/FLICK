@@ -171,6 +171,10 @@
     <ClInclude Include="Source\NotesManager.h" />
     <ClInclude Include="Source\NotesMetaData.h" />
     <ClInclude Include="Source\Object3D.h" />
+    <ClInclude Include="Source\ResultBoardManager.h" />
+    <ClInclude Include="Source\ResultData.h" />
+    <ClInclude Include="Source\ResultDataConnector.h" />
+    <ClInclude Include="Source\ResultScene.h" />
     <ClInclude Include="Source\Screen.h" />
     <ClInclude Include="Source\PlayScene.h" />
     <ClInclude Include="Source\SceneFactory.h" />
@@ -207,6 +211,10 @@
     <ClCompile Include="Source\NotesMetaData.cpp" />
     <ClCompile Include="Source\Object3D.cpp" />
     <ClCompile Include="Source\PlayScene.cpp" />
+    <ClCompile Include="Source\ResultBoardManager.cpp" />
+    <ClCompile Include="Source\ResultData.cpp" />
+    <ClCompile Include="Source\ResultDataConnector.cpp" />
+    <ClCompile Include="Source\ResultScene.cpp" />
     <ClCompile Include="Source\SceneFactory.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
     <ClCompile Include="Source\StaticMesh.cpp" />

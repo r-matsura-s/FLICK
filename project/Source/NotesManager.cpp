@@ -7,8 +7,10 @@
 #include "NotesLine.h"
 #include "../Library/json.hpp"
 #include <fstream>
+#include "ResultDataConnector.h"
 
-
+#undef max
+#undef min
 using namespace nlohmann;
 
 namespace
@@ -114,90 +116,6 @@ NotesManager::NotesManager()
 {
 	sound_manager_ = SoundManager::Instance();
 
-	// Jsonに移行(2025/11/14)
-	#pragma region //ノーツ手動配置
-	/*
-	 
-	//仮セット
-	current_bpm_ = 198.0f;
-	sound_manager_->LoadSound("unused_music", ".wav", SoundType::MUSIC, 2);
-	sound_manager_->SetBGMVolume(0.7f);
-	
-	float bpm = current_bpm_;
-	float offset = CalcNotesTime(bpm, 3, 1, 1.0f); //オフセット(秒)
-	
-	// 最初のビームまで
-	notes_list_.push_back(new Notes(0.00f, offset + CalcNotesTime(bpm, 1, 4, 1.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.15f, offset + CalcNotesTime(bpm, 1, 4, 2.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.25f, offset + CalcNotesTime(bpm, 1, 4, 3.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.40f, offset + CalcNotesTime(bpm, 1, 4, 4.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(NotesType::HOLD_1, 
-		0.5f, offset + CalcNotesTime(bpm, 2, 4, 1.0f), 
-		-0.5f, offset + CalcNotesTime(bpm, 3, 4, 1.0f)));
-	
-	notes_list_.push_back(new Notes(0.5f, offset + CalcNotesTime(bpm, 3, 4, 1.0f), NotesType::HEALING));
-	
-	notes_list_.push_back(new Notes(NotesType::HOLD_1, 
-		0.5f, offset + CalcNotesTime(bpm, 4, 4, 1.0f), 
-		-0.5f, offset + CalcNotesTime(bpm, 5, 4, 1.0f)));
-	
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 5, 4, 1.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.1f, offset + CalcNotesTime(bpm, 5, 4, 2.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.2f, offset + CalcNotesTime(bpm, 5, 4, 3.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.3f, offset + CalcNotesTime(bpm, 5, 4, 4.0f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(NotesType::HOLD_1, 
-		0.4f, offset + CalcNotesTime(bpm, 6, 4, 1.0f), 
-		0.0f, offset + CalcNotesTime(bpm, 7, 4, 1.0f)));
-	
-	notes_list_.push_back(new Notes(NotesType::HOLD_2, 
-		-0.4f, offset + CalcNotesTime(bpm, 7, 4, 1.0f), 
-		0.0f, offset + CalcNotesTime(bpm, 7, 4, 3.0f)));
-	
-	notes_list_.push_back(new Notes(NotesType::HOLD_1,
-		0.4f, offset + CalcNotesTime(bpm, 8, 4, 1.0f), 
-		0.3f, offset + CalcNotesTime(bpm, 9, 4, 3.0f)));
-	notes_list_.push_back(new Notes(NotesType::HOLD_1, 
-		-0.4f, offset + CalcNotesTime(bpm, 8, 4, 1.0f), 
-		-0.3f, offset + CalcNotesTime(bpm, 9, 4, 3.0f)));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 1.00f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 1.25f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 1.50f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 1.75f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 2.00f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 2.25f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 2.50f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 2.75f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 3.00f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 3.25f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 3.50f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 3.75f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 4.00f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 4.25f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 4.50f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 8, 4, 4.75f), NotesType::HEALING));
-
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 1.00f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 1.25f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 1.50f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 1.75f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 2.00f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 2.25f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 2.50f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 2.75f), NotesType::HEALING));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 9, 4, 3.00f), NotesType::HEALING));
-
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 10, 4, 1.0f), NotesType::TAP_1));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 11, 4, 1.0f), NotesType::TAP_1));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 12, 4, 1.0f), NotesType::TAP_1));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 13, 4, 1.0f), NotesType::TAP_1));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 14, 4, 1.0f), NotesType::TAP_2));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 15, 4, 1.0f), NotesType::TAP_2));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 16, 4, 1.0f), NotesType::TAP_2));
-	notes_list_.push_back(new Notes(0.0f, offset + CalcNotesTime(bpm, 17, 4, 1.0f), NotesType::TAP_2));
-
-	// */
-	#pragma endregion
-
 	//オミット(2025/10/31)
 	#pragma region //ライン配置
 	/*
@@ -236,6 +154,8 @@ NotesManager::NotesManager()
 
 	combo_count_ = 0;
 	is_auto_play_ = true;
+
+	result_data_ = new ResultData();
 }
 
 NotesManager::~NotesManager()
@@ -251,6 +171,8 @@ NotesManager::~NotesManager()
 		SAFE_DELETE(note);
 	}
 	notes_list_.clear();
+
+	SAFE_DELETE(result_data_);
 }
 
 void NotesManager::Update()
@@ -280,10 +202,18 @@ void NotesManager::Draw()
 	// コンボ数が1以上のときのみ表示
 	if (combo_count_ != 0) 
 	{
-		//Renderer::Text(Vector2(-100, -300), Color::White(), "COMBO:" + std::to_string(combo_count_));
+		Renderer::Text(Vector2(-100, -300), Color::White(), "COMBO:" + std::to_string(combo_count_));
 	}
 
+	result_data_->DrawScore(Vector2(-300, -300));
 	Renderer::Text(Vector2(400, -300), Color::White(), meta_data_.title_);
+
+#if _DEBUG
+	if (is_auto_play_)
+	{
+		Renderer::Text(Vector2(-400, -300), Color::White(), "AUTO PLAY");
+	}
+#endif
 }
 
 
@@ -403,6 +333,12 @@ void NotesManager::UpdateStatePlay()
 	{
 		ChangeState(InGameState::FINISH);
 	}
+#if _DEBUG
+	if (CheckHitKey(KEY_INPUT_Q))
+	{
+		ChangeState(InGameState::FINISH);
+	}
+#endif
 }
 
 void NotesManager::UpdateStatePause()
@@ -412,7 +348,13 @@ void NotesManager::UpdateStatePause()
 void NotesManager::UpdateStateFinish()
 {
 	// 仮
-	SceneManager::ChangeScene("TITLE");
+	if (true)
+	{
+		// プレイデータを送る
+		FindGameObject<ResultDataConnector>()->SetResultData(*result_data_);
+		
+		SceneManager::ChangeScene("RESULT");
+	}
 }
 
 void NotesManager::JudgeNotes()
@@ -679,6 +621,7 @@ void NotesManager::JudgeNotes()
 				{
 					note->SetJudged(true);
 					note->PlayTapSE();
+					result_data_->AddScore(1);
 				}
 			}
 
@@ -791,6 +734,8 @@ void NotesManager::OnJudged(const Notes* note, JudgeResult result)
 	{
 		combo_count_ = 0;
 	}
+
+	result_data_->OnJudge((int)result, combo_count_);
 
 	// ノーツ音の再生
 	note->PlayTapSE();

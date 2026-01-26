@@ -5,6 +5,7 @@
 
 class Notes;
 class SoundManager;
+class ResultData;
 
 // ”»’èƒ^ƒCƒv
 enum class JudgeResult
@@ -80,6 +81,8 @@ private:
 	float current_bpm_ = 120.0f;
 	int combo_count_ = 0;
 	InGameState ingame_state_ = InGameState::LOAD;
+
+	ResultData* result_data_;
 
 	bool is_auto_play_ = false;
 };

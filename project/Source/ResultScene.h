@@ -1,0 +1,15 @@
+#pragma once
+#include "../Library/SceneBase.h"
+
+/// <summary>
+/// リザルトのシーンを制御する
+/// </summary>
+class ResultScene : public SceneBase
+{
+public:
+	ResultScene();
+	~ResultScene();
+
+	void Update() override;
+	void Draw() override;
+};

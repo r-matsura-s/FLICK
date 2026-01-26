@@ -95,6 +95,18 @@
     <ClCompile Include="Source\MusicTrack.cpp">
       <Filter>TitleScene\MusicSelect</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ResultScene.cpp">
+      <Filter>ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResultData.cpp">
+      <Filter>ResultScene\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResultBoardManager.cpp">
+      <Filter>ResultScene\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResultDataConnector.cpp">
+      <Filter>ResultScene\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -219,6 +231,18 @@
     <ClInclude Include="Source\MusicTrack.h">
       <Filter>TitleScene\MusicSelect</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ResultScene.h">
+      <Filter>ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ResultData.h">
+      <Filter>ResultScene\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ResultBoardManager.h">
+      <Filter>ResultScene\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ResultDataConnector.h">
+      <Filter>ResultScene\Score</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -262,6 +286,12 @@
     </Filter>
     <Filter Include="TitleScene\MusicSelect">
       <UniqueIdentifier>{b36ad72d-8997-49d2-a6bb-c024e33b4a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResultScene">
+      <UniqueIdentifier>{aa2f92d3-4cf0-4031-bbda-8e824da36898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResultScene\Score">
+      <UniqueIdentifier>{2a335d0f-13cf-46f2-add8-80e6ead3d10e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
