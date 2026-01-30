@@ -796,5 +796,6 @@ void NotesManager::CreateNotes(const std::string& file_name, float hs_rate)
 
 	}PARSE_CATCH
 	
+	DebugLog("-- ノーツデータの読み込み完了 ---");
 }
 #endif //ifdef PARSE_CATCH

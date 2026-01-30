@@ -32,6 +32,7 @@ MusicSelectManager::MusicSelectManager()
 
 MusicSelectManager::~MusicSelectManager()
 {
+	OnTrackChange();
 	for (MusicTrack* track : music_tracks_)
 	{
 		delete track;
@@ -92,7 +93,7 @@ void MusicSelectManager::Draw()
 	DrawBoxAA(box_pos1.x, box_pos1.y, box_pos2.x, box_pos2.y, Color::White16(), FALSE, 5.0f);
 
 	Vector2I text_pos = Vector2I(540, 160);
-	float notes_speed = 1.0f + (13.0f - 1.0f) * high_spin_rate_;
+	float notes_speed = 1.0f + (9.0f - 1.0f) * high_spin_rate_;
 	DrawFormatString(text_pos.x, text_pos.y, Color::White16(), "ノーツ速度:%.1f", notes_speed);
 
 	for (MusicTrack* track : music_tracks_)
@@ -111,7 +112,7 @@ void MusicSelectManager::OnTrackChange()
 	// 選択された楽曲のメタデータを更新
 	NotesMetaDataContext* selected = FindGameObject<NotesMetaDataContext>();
 	selected->meta_data_ = *music_tracks_[select_index_]->GetMetaData();
-	selected->high_spin_rate_ = high_spin_rate_;
+	selected->high_spin_rate_ = high_spin_rate_; 
 
 	// BGMを変更して再生
 	SoundManager& sound_manager = *SoundManager::Instance();
