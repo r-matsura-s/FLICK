@@ -99,6 +99,7 @@ private:
 	int note_handle_ = -1;			// 通常ノーツ画像ハンドル
 	int note_overlay_handle_ = -1;	// 通常ノーツ[2]画像ハンドル
 	int flick_handle_ = -1;			// フリックノーツ画像ハンドル
+	int healing_handle_ = -1;		// 回復ノーツ画像
 
 	bool judged_ = false;			// 判定済みか
 

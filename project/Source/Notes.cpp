@@ -267,7 +267,7 @@ void Notes::SetNoteImage()
 		flick_handle_ = ResourceLoader::LoadGraph("data/texture/f_R.png");
 		break;
 	case NotesType::HEALING:
-		//healing_handle_ = ResourceLoader::LoadGraph("data/texture/healing.png");
+		healing_handle_ = ResourceLoader::LoadGraph("data/texture/healing.png");
 		break;
 	}
 }
@@ -345,7 +345,11 @@ void Notes::DrawDamage() const
 
 void Notes::DrawHealing() const
 {
-	DrawSphere3D(position_, 60.0f, 4, Color::Yellow16(), Color::Yellow16(), FALSE);
+	//DrawSphere3D(position_, 60.0f, 4, Color::Yellow16(), Color::Yellow16(), FALSE);
+	
+	static const float radius = 40.0f;
+	static const double scale = 40.0 * (1.0f / 512.0) * 5.0;
+	DrawExtendGraph3D(position_.x, position_.y + radius, position_.z, scale, scale, healing_handle_, TRUE);
 }
 
 

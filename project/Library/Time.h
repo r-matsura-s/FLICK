@@ -6,7 +6,8 @@
 /// DeltaTime()で、その時間を秒で返す
 /// 60フレームの場合は、0.016が返る
 /// </summary>
-namespace Time {
+namespace Time 
+{
 	/// <summary>
 	/// 最初に１回だけ呼んでもらう
 	/// 計測のための初期化をする
@@ -38,6 +39,8 @@ namespace Time {
 	/// </summary>
 	/// <param name="scale">新しいタイムスケール値</param>
 	void SetTimeScale(float scale);
+
+	float GetFPS();
 
 	/// <summary>
 	/// 最後に１回だけ呼んでもらう

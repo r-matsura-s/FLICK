@@ -1,6 +1,10 @@
 #include "time.h"
 #include <Windows.h>
 #include <DxLib.h>
+
+// 平均値を計測するか
+#define USE_TIME_BUF 1
+
 namespace 
 {
 	LARGE_INTEGER freq;
@@ -8,11 +12,14 @@ namespace
 	float deltaTime;
 	float refreshRate;
 	float timeScale;
+
+#ifdef USE_TIME_BUF
 	// 直近の処理時間を保存
 	const int BUF_SIZE = 30;
 	float timeBuf[BUF_SIZE];
 	int readP;
 	int writeP;
+#endif
 };
 
 void Time::Init()
@@ -24,8 +31,13 @@ void Time::Init()
 	refreshRate = (float)GetDeviceCaps(hdc, VREFRESH);	// リフレッシュレートの取得
 	ReleaseDC(GetMainWindowHandle(), hdc);	// デバイスコンテキストの解放
 
+#ifdef USE_TIME_BUF
 	readP = 0;
 	writeP = 0;
+	for (int i = 0; i < BUF_SIZE; i++) {
+		timeBuf[i] = 1.0f / refreshRate;
+	}
+#endif
 	timeScale = 1.0f;
 }
 
@@ -33,6 +45,8 @@ void Time::Refresh()
 {
 	LARGE_INTEGER last = current;
 	QueryPerformanceCounter(&current);
+
+#ifdef USE_TIME_BUF
 	float dt = static_cast<float >(current.QuadPart - last.QuadPart) / freq.QuadPart;
 	
 	// 処理時間を保存
@@ -63,6 +77,9 @@ void Time::Refresh()
 	else {
 		deltaTime = dt;
 	}
+#else
+	deltaTime = static_cast<float>(current.QuadPart - last.QuadPart) / freq.QuadPart;
+#endif
 }
 
 float Time::DeltaTime()
@@ -78,6 +95,15 @@ float Time::DeltaTimePlane()
 void Time::SetTimeScale(float scale)
 {
 	timeScale = scale;
+}
+
+float Time::GetFPS()
+{
+#ifdef USE_TIME_BUF
+	return 1.0f / timeBuf[0];
+#else
+	return 1.0f / deltaTime;
+#endif
 }
 
 void Time::Release()

@@ -285,8 +285,7 @@ void NotesManager::UpdateStatePlay()
 					note->SetJudged(true);
 					combo_count_ = 0;
 
-					JudgedText* judged_text = new JudgedText();
-					judged_text->SetJudgeResult(JudgeResult::MISS, note->Horizontal());
+					JudgedTextContext::Create(JudgeResult::MISS, note->Horizontal());
 				}
 			}
 			//*
@@ -300,8 +299,7 @@ void NotesManager::UpdateStatePlay()
 					note->SetHolding(false);
 					combo_count_ = 0;
 
-					JudgedText* judged_text = new JudgedText();
-					judged_text->SetJudgeResult(JudgeResult::MISS, note->Horizontal());
+					JudgedTextContext::Create(JudgeResult::MISS, note->Horizontal());
 				}
 			}
 			// */
@@ -319,8 +317,7 @@ void NotesManager::UpdateStatePlay()
 
 				combo_count_ = 0;
 
-				JudgedText* judged_text = new JudgedText();
-				judged_text->SetJudgeResult(JudgeResult::MISS, note->Horizontal());
+				JudgedTextContext::Create(JudgeResult::MISS, note->Horizontal());
 			}
 		}
 	}
@@ -410,13 +407,6 @@ void NotesManager::JudgeNotes()
 							OnJudged(note, JudgeResult::PERFECT);
 							// 開始時点では SetJudged(true) しない（終了判定があるため）
 						}
-						else if (diff < -GOOD_WINDOW)
-						{
-							// 開始判定を逃した場合はミス（通常の挙動に合わせる）
-							note->SetJudged(true);
-							note->SetHoldEnded(true);
-							OnJudged(note, JudgeResult::MISS);
-						}
 					}
 					// 開始済みで終了前なら、終了を自動で処理
 					else if (note->HoldStarted() && !note->HoldEnded())
@@ -429,15 +419,6 @@ void NotesManager::JudgeNotes()
 							note->SetHoldEnded(true);
 							note->SetHolding(false);
 							OnJudged(note, JudgeResult::PERFECT);
-							continue;
-						}
-						// ウィンドウを過ぎてミスするなら通常通りミス扱い
-						else if (hold_end_diff < -GOOD_WINDOW)
-						{
-							note->SetJudged(true);
-							note->SetHoldEnded(true);
-							note->SetHolding(false);
-							OnJudged(note, JudgeResult::MISS);
 							continue;
 						}
 						// それ以外は自動で押し続ける
@@ -723,8 +704,7 @@ void NotesManager::JudgeNotes()
 void NotesManager::OnJudged(const Notes* note, JudgeResult result)
 {
 	// 判定結果の表示
-	JudgedText* judged_text = new JudgedText();
-	judged_text->SetJudgeResult(result, note->Horizontal());
+	JudgedTextContext::Create(result, note->Horizontal());
 
 	// コンボ数の更新
 	if (result <= JudgeResult::GREAT)

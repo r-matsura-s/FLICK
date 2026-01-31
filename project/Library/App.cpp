@@ -4,34 +4,67 @@
 #include "Time.h"
 #include "resourceLoader.h"
 #include <DxLib.h>
+#include "../Source/ActionEvent.h"
+#include "../Source/JudgedText.h"
+
+namespace
+{
+	struct AppAction
+	{
+		ActionEvent<> init, update, draw, release;
+	};
+
+	AppAction* actions;
+}
+void AddActions();
+
+void AddActions()
+{
+	// Init
+	actions->init += ObjectManager::Init;
+	actions->init += SceneManager::Init;
+	actions->init += Time::Init;
+	actions->init += ResourceLoader::Init;
+	actions->init += JudgedTextContext::Init;
+
+	// Release
+	actions->release += JudgedTextContext::Release;
+	actions->release += Time::Release;
+	actions->release += SceneManager::Release;
+	actions->release += ObjectManager::Release;
+	actions->release += ResourceLoader::Release;
+
+	// Update
+	actions->update += SceneManager::Update;
+	actions->update += ObjectManager::Update;
+
+	// Draw
+	actions->draw += Time::Refresh;
+	actions->draw += ObjectManager::Draw;
+	actions->draw += SceneManager::Draw;
+}
 
 void AppInit()
 {
-	ObjectManager::Init();
-	SceneManager::Init();
-	Time::Init();
-	ResourceLoader::Init();
+	actions = new AppAction();
+	AddActions();
+	actions->init.Invoke();
 }
 
 void AppUpdate()
 {
-	SceneManager::Update();
-	ObjectManager::Update();
+	actions->update.Invoke();
 }
 
 void AppDraw()
 {
-	Time::Refresh();
-	ObjectManager::Draw();
-	SceneManager::Draw();
+	actions->draw.Invoke();
 }
 
 void AppRelease()
 {
-	Time::Release();
-	SceneManager::Release();
-	ObjectManager::Release();
-	ResourceLoader::Release();
+	actions->release.Invoke();
+	delete actions;
 
 	OutputDebugStringA("---------- This app program is finished ----------\n");
 }
