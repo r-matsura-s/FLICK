@@ -164,6 +164,7 @@
     <ClInclude Include="Source\JsonTitleCollector.h" />
     <ClInclude Include="Source\JudgedText.h" />
     <ClInclude Include="Source\LaneManager.h" />
+    <ClInclude Include="Source\MoveObject.h" />
     <ClInclude Include="Source\MusicSelectManager.h" />
     <ClInclude Include="Source\MusicTrack.h" />
     <ClInclude Include="Source\Notes.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Source\SceneFactory.h" />
     <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\StaticMesh.h" />
+    <ClInclude Include="Source\TitleMoveObjectManager.h" />
     <ClInclude Include="Source\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +205,7 @@
     <ClCompile Include="Source\InputManager.cpp" />
     <ClCompile Include="Source\JudgedText.cpp" />
     <ClCompile Include="Source\LaneManager.cpp" />
+    <ClCompile Include="Source\MoveObject.cpp" />
     <ClCompile Include="Source\MusicSelectManager.cpp" />
     <ClCompile Include="Source\MusicTrack.cpp" />
     <ClCompile Include="Source\Notes.cpp" />
@@ -218,6 +221,7 @@
     <ClCompile Include="Source\SceneFactory.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
     <ClCompile Include="Source\StaticMesh.cpp" />
+    <ClCompile Include="Source\TitleMoveObjectManager.cpp" />
     <ClCompile Include="Source\TitleScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

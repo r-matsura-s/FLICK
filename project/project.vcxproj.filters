@@ -107,6 +107,12 @@
     <ClCompile Include="Source\ResultDataConnector.cpp">
       <Filter>ResultScene\Score</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MoveObject.cpp">
+      <Filter>TitleScene\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TitleMoveObjectManager.cpp">
+      <Filter>TitleScene\MoveObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -243,6 +249,12 @@
     <ClInclude Include="Source\ResultDataConnector.h">
       <Filter>ResultScene\Score</Filter>
     </ClInclude>
+    <ClInclude Include="Source\MoveObject.h">
+      <Filter>TitleScene\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TitleMoveObjectManager.h">
+      <Filter>TitleScene\MoveObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -292,6 +304,9 @@
     </Filter>
     <Filter Include="ResultScene\Score">
       <UniqueIdentifier>{2a335d0f-13cf-46f2-add8-80e6ead3d10e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TitleScene\MoveObject">
+      <UniqueIdentifier>{e535213d-9a3f-4d8c-9e33-6398802dd453}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

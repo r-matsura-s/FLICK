@@ -27,11 +27,14 @@ public:
 	void UpdateFog();
 
 private:
+	void ChangeFogColor();
+
 	TitleState state_ = TitleState::TITLE_LOGO;
 	MusicSelectManager* music_select_manager_;
 	
 	Color current_fog_;
 	Color begin_fog_;
 	Color target_fog_;
+	int colors_index_ = 0;
 	float fog_tween_rate_ = -1.0f;
 };
