@@ -20,7 +20,7 @@ TitleScene::TitleScene()
 	SetCameraPositionAndTarget_UpVecY(Vector3::Zero(), Vector3::UnitZ());
 
 	SetFogColor(200, 100, 0);
-	SetFogStartEnd(10.0f, 2700.0f);
+	SetFogStartEnd(8.0f, 2300.0f);
 	target_fog_ = Color(0.1f, 0.8f, 0.8f);
 	colors_index_ = GetRand(RAND_MAX);
 	ChangeFogColor();

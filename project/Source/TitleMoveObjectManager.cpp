@@ -8,11 +8,12 @@ namespace
 	const float ERASE_TIME = 5.0f;
 
 	// transform—p
-	const Vector3 CREATE_OFFSET = Vector3(0.0f, 100.0f, 1000.0f);
+	const Vector3 CREATE_OFFSET = Vector3(0.0f, 100.0f, 1200.0f);
 	const float OBJECT_SCALE = 1.0f;
 
 	// move_speed—p
-	const Vector3 VELOCITY = Vector3(0.0f, 120.0f, -640.0f);
+	const Vector3 VELOCITY = Vector3(0.0f, 150.0f, -300.0f);
+	const float ROTATION_SPEED = 50.0f;
 }
 
 float get_randf();
@@ -71,7 +72,7 @@ void TitleMoveObjectManager::CreateObject()
 	);
 	obj->move_speed_ = Transform(
 		VELOCITY * rot_matrix, 
-		Vector3(get_randf(), get_randf(), get_randf()) * DX_TWO_PI_F,
+		Vector3(get_randf(), get_randf(), get_randf()) * (DegToRad * ROTATION_SPEED),
 		Vector3::Zero()
 	);
 

@@ -8,7 +8,6 @@ public:
 	~MoveObject();
 
 	void Update() override;
-	void Draw()	override;
 
 	Transform move_speed_;
 };
