@@ -28,8 +28,21 @@ public:
 
 private:
 	void ChangeFogColor();
+	void DrawTitleLogo();
+
+	// ----------------------------------
+	// タイトルロゴ関連
+	// ----------------------------------
 
 	TitleState state_ = TitleState::TITLE_LOGO;
+	Vector2I logo_size_;
+	std::vector<int> logo_image_;
+	float logo_scale_rate_ = 0.0f;
+	
+	// ----------------------------------
+	// 楽曲選択関連
+	// ----------------------------------
+
 	MusicSelectManager* music_select_manager_;
 	
 	Color current_fog_;

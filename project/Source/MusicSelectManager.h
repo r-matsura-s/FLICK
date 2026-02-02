@@ -16,10 +16,10 @@ public:
 	void Update();
 	void Draw();
 
-	static const char* GetMusicSheetsPath();
+	static const char* GetMusicSheetsPath();	
+	void OnTrackChange();
 
 private:
-	void OnTrackChange();
 
 	std::vector<MusicTrack*> music_tracks_;
 	Transform transform_;

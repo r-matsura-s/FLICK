@@ -26,8 +26,6 @@ MusicSelectManager::MusicSelectManager()
 		track->draw_action_ += [track] { track->DrawJacket(); };
 		track->draw_action_ += [track] { track->DrawTrackData(); };
 	}
-
-	OnTrackChange();
 }
 
 MusicSelectManager::~MusicSelectManager()
