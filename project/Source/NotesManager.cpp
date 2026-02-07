@@ -8,6 +8,7 @@
 #include "../Library/json.hpp"
 #include <fstream>
 #include "ResultDataConnector.h"
+#include "ActionEvent.h"
 
 #undef max
 #undef min
@@ -701,7 +702,7 @@ void NotesManager::JudgeNotes()
 	}
 }
 
-void NotesManager::OnJudged(const Notes* note, JudgeResult result)
+void NotesManager::OnJudged(Notes* note, JudgeResult result)
 {
 	// 判定結果の表示
 	JudgedTextContext::Create(result, note->Horizontal());
@@ -720,6 +721,8 @@ void NotesManager::OnJudged(const Notes* note, JudgeResult result)
 
 	// ノーツ音の再生
 	note->PlayTapSE();
+
+	note->finish_action_.Invoke((int)result);
 }
 
 #define PARSE_CATCH catch (nlohmann::detail::exception ex) { MessageBox(NULL, _TEXT("JSONのパースに失敗しました。\n"), std::to_string(ex.id).c_str() , MB_OK);exit(0); }

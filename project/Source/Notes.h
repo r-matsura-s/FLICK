@@ -67,6 +67,8 @@ public:
 	static NotesType ToNoteType(const std::string& note_type);
 
 	void UpdateVerticalPos();
+	
+	ActionEvent<int> finish_action_;// ƒm[ƒcI—¹ˆ—‚ğ“o˜^‚·‚é
 
 private:
 	void UpdateMove();
@@ -77,6 +79,7 @@ private:
 	void SetUpdateAction();
 	void SetDrawAction();
 	void SetNoteImage();
+	void SetFinishAction();
 
 	void DrawTap(const Vector3& pos, const Color& color) const;
 	void DrawHold(const Vector3& begin, const Vector3& end, Color color) const;

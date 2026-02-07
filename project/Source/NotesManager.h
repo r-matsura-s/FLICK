@@ -62,7 +62,7 @@ private:
 	void UpdateStatePause();
 	void UpdateStateFinish();
 
-	void OnJudged(const Notes* note, JudgeResult result);
+	void OnJudged(Notes* note, JudgeResult result);
 	void CreateNotes(const std::string& file_name, float hs_rate);
 	void JudgeNotes();
 

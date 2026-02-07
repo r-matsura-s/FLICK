@@ -50,4 +50,5 @@ private:
 	Color target_fog_;
 	int colors_index_ = 0;
 	float fog_tween_rate_ = -1.0f;
+	int side_fade_image_ = -1;
 };

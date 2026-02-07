@@ -3,6 +3,7 @@
 #include "SoundManager.h"
 #include "../Library/resourceLoader.h"
 #include "../Library/Renderer2D.h"
+#include "CameraShake.h"
 
 #undef max
 #undef min
@@ -31,6 +32,7 @@ Notes::Notes(double horizontal, double arrive_time, NotesType type)
 	SetUpdateAction();
 	SetDrawAction();
 	SetNoteImage();
+	SetFinishAction();
 }
 
 // ホールドノーツ専用コンストラクタ
@@ -59,6 +61,7 @@ Notes::Notes(NotesType type, double begin_horizontal, double begin_arrive_time, 
 	SetUpdateAction();
 	SetDrawAction();
 	SetNoteImage();
+	SetFinishAction();
 }
 
 Notes::~Notes()
@@ -191,8 +194,6 @@ void Notes::SetTapSound()
 
 void Notes::Draw()
 {
-	//if (judged_) return;
-
 	// 描画処理
 	draw_action_.Invoke();
 }
@@ -268,6 +269,23 @@ void Notes::SetNoteImage()
 		break;
 	case NotesType::HEALING:
 		healing_handle_ = ResourceLoader::LoadGraph("data/texture/healing.png");
+		break;
+	}
+}
+
+void Notes::SetFinishAction()
+{
+	switch (type_)
+	{
+	case NotesType::FLICK_L:
+		finish_action_ += 
+			[this](int judge) { if (judge <= 1) { FindGameObject<CameraShake>()->StartRotate( 3.0f); } };
+		break;
+	case NotesType::FLICK_R:
+		finish_action_ += 
+			[this](int judge) { if (judge <= 1) { FindGameObject<CameraShake>()->StartRotate(-3.0f); } };
+		break;
+	default:
 		break;
 	}
 }

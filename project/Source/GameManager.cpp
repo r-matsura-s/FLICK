@@ -3,6 +3,7 @@
 #include "NotesManager.h"
 #include "Character.h"
 #include "Object3D.h"
+#include "CameraShake.h"
 
 
 namespace
@@ -24,6 +25,11 @@ GameManager::GameManager()
 	new LaneManager();
 	new NotesManager();
 	new Character();
+
+	CameraShake* camera = new CameraShake();
+	camera->base_transform_.SetPosition(CAMERA_DEFAULT_POSITION);
+	camera->base_transform_.SetRotation(Vector3(CAMERA_DEFAULT_ANGLE * DegToRad, 0.0f, 0.0f));
+	camera->Draw();
 }
 
 GameManager::~GameManager()

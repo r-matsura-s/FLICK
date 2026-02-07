@@ -113,6 +113,9 @@
     <ClCompile Include="Source\TitleMoveObjectManager.cpp">
       <Filter>TitleScene\MoveObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CameraShake.cpp">
+      <Filter>PlayScene\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -255,6 +258,9 @@
     <ClInclude Include="Source\TitleMoveObjectManager.h">
       <Filter>TitleScene\MoveObject</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CameraShake.h">
+      <Filter>PlayScene\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -307,6 +313,9 @@
     </Filter>
     <Filter Include="TitleScene\MoveObject">
       <UniqueIdentifier>{e535213d-9a3f-4d8c-9e33-6398802dd453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayScene\Camera">
+      <UniqueIdentifier>{6beecdb6-4f4b-4c15-b57c-ddb00a34c15c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

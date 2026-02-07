@@ -2,6 +2,8 @@
 #include "Object3D.h"
 #include "TitleMoveObjectManager.h"
 #include "../Library/Renderer2D.h"
+#include "InputManager.h"
+#include "SoundManager.h"
 
 namespace
 {
@@ -24,6 +26,7 @@ float OutQuint(float begin, float end, float x) {
 	return begin + (end - begin) * (1.0f - std::powf(1.0f - x, 5)); 
 }
 
+
 TitleScene::TitleScene()
 {
 	SetCameraPositionAndTarget_UpVecY(Vector3::Zero(), Vector3::UnitZ());
@@ -45,6 +48,10 @@ TitleScene::TitleScene()
 		logo_image_[i] = LoadGraph(("data/texture/logo_title_" + std::to_string(i) + ".png").c_str());
 	}
 	logo_size_ = GetGraphSize(logo_image_[0]);
+
+	side_fade_image_ = LoadGraph("data/texture/music_select_side.png");
+
+	SoundManager::Instance()->PlayBGM("title_logo");
 }
 
 TitleScene::~TitleScene()
@@ -57,10 +64,14 @@ TitleScene::~TitleScene()
 		DeleteGraph(logo_image_[i]);
 	}
 	logo_image_.clear();
+
+	DeleteGraph(side_fade_image_);
 }
 
 void TitleScene::Update()
 {
+	InputManager& input = *InputManager::Instance();
+
 	switch (state_)
 	{
 	case TitleState::TITLE_LOGO:
@@ -70,7 +81,7 @@ void TitleScene::Update()
 			logo_scale_rate_ = 0.0f;
 		}
 
-		if (CheckHitKeyAll())
+		if (input.GetButtonDown(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_SPACE))
 		{
 			state_ = TitleState::SELECT_MUSIC;
 			SetFogEnable(TRUE);
@@ -80,7 +91,7 @@ void TitleScene::Update()
 	case TitleState::SELECT_MUSIC:
 		UpdateFog();
 		music_select_manager_->Update();
-		if (CheckHitKey(KEY_INPUT_P))
+		if (input.GetButtonDown(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_P))
 		{
 			SceneManager::ChangeScene("PLAY");
 		}
@@ -104,6 +115,12 @@ void TitleScene::Draw()
 		break;
 	case TitleState::SELECT_MUSIC:
 		music_select_manager_->Draw();
+		
+		Renderer::SetBlendMode_Alpha((int)(255.0f * 0.6));
+		SetDrawBright((int)(current_fog_.r * 255.0f), (int)(current_fog_.g * 255.0f), (int)(current_fog_.b * 255.0f));
+		DrawGraph(0, 0, side_fade_image_, TRUE);
+		SetDrawBright(255, 255, 255);
+		Renderer::ResetBlendMode();
 		break;
 	default:
 		break;
