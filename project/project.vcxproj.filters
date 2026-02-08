@@ -116,6 +116,9 @@
     <ClCompile Include="Source\CameraShake.cpp">
       <Filter>PlayScene\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ActionGameObject.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -260,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="Source\CameraShake.h">
       <Filter>PlayScene\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ActionGameObject.h">
+      <Filter>PlayScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

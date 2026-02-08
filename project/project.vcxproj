@@ -157,6 +157,7 @@
     <ClInclude Include="Library\Time.h" />
     <ClInclude Include="Library\Transform.h" />
     <ClInclude Include="Source\ActionEvent.h" />
+    <ClInclude Include="Source\ActionGameObject.h" />
     <ClInclude Include="Source\BootScene.h" />
     <ClInclude Include="Source\CameraShake.h" />
     <ClInclude Include="Source\Character.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Library\resourceLoader.cpp" />
     <ClCompile Include="Library\SceneManager.cpp" />
     <ClCompile Include="Library\Time.cpp" />
+    <ClCompile Include="Source\ActionGameObject.cpp" />
     <ClCompile Include="Source\BootScene.cpp" />
     <ClCompile Include="Source\CameraShake.cpp" />
     <ClCompile Include="Source\Character.cpp" />
