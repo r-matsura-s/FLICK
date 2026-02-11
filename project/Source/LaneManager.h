@@ -34,5 +34,10 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	
+	void DrawJudgeLine();
+	void DrawSideWall();
+
+private:
+	float side_wall_scroll_ = 0.0f;
+	int side_wall_image_ = -1;
 };

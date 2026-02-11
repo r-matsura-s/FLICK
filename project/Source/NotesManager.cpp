@@ -154,7 +154,7 @@ NotesManager::NotesManager()
 	#pragma endregion 
 
 	combo_count_ = 0;
-	is_auto_play_ = true;
+	//is_auto_play_ = true;
 
 	result_data_ = new ResultData();
 }

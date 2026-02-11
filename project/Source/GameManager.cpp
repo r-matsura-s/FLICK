@@ -2,7 +2,7 @@
 #include "LaneManager.h"
 #include "NotesManager.h"
 #include "Character.h"
-#include "Object3D.h"
+#include "ActionGameObject.h"
 #include "CameraShake.h"
 
 
@@ -22,7 +22,7 @@ GameManager::GameManager()
 	back_ground_ = new Object3D("Sky_Daylight01", Transform(Vector3(), Vector3(), Vector3::One() * 3));
 	back_ground_->SetStaticMeshFlag(false);
 
-	new LaneManager();
+	LaneManager* lane_manager = new LaneManager();
 	new NotesManager();
 	new Character();
 
@@ -30,6 +30,10 @@ GameManager::GameManager()
 	camera->base_transform_.SetPosition(CAMERA_DEFAULT_POSITION);
 	camera->base_transform_.SetRotation(Vector3(CAMERA_DEFAULT_ANGLE * DegToRad, 0.0f, 0.0f));
 	camera->Draw();
+
+	ActionGameObject* side_wall = new ActionGameObject();
+	side_wall->SetDrawOrder(-2000);
+	side_wall->OnDraw += [lane_manager] { lane_manager->DrawSideWall(); };
 }
 
 GameManager::~GameManager()

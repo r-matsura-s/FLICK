@@ -257,9 +257,8 @@ void Notes::SetNoteImage()
 		break;
 	case NotesType::HOLD_1:
 	case NotesType::HOLD_2:
-		note_handle_ = ResourceLoader::LoadGraph("data/texture/note.png");
+		note_handle_ = ResourceLoader::LoadGraph("data/texture/hold.png");
 		note_overlay_handle_ = ResourceLoader::LoadGraph("data/texture/note_overley.png");
-		//hold_handle_ = ResourceLoader::LoadGraph("data/texture/hold.png");
 		break;
 	case NotesType::FLICK_L:
 		flick_handle_ = ResourceLoader::LoadGraph("data/texture/f_L.png");
