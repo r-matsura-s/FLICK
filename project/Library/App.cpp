@@ -6,6 +6,7 @@
 #include <DxLib.h>
 #include "../Source/ActionEvent.h"
 #include "../Source/JudgedText.h"
+#include "../Source/EffectManager.h"
 
 namespace
 {
@@ -16,8 +17,8 @@ namespace
 
 	AppAction* actions;
 }
-void AddActions();
 
+void AddActions();
 void AddActions()
 {
 	// Init
@@ -25,10 +26,12 @@ void AddActions()
 	actions->init += SceneManager::Init;
 	actions->init += Time::Init;
 	actions->init += ResourceLoader::Init;
+	actions->init += EffectManager::Init;
 	actions->init += JudgedTextContext::Init;
 
 	// Release
 	actions->release += JudgedTextContext::Release;
+	actions->release += EffectManager::Release;
 	actions->release += Time::Release;
 	actions->release += SceneManager::Release;
 	actions->release += ObjectManager::Release;
@@ -37,12 +40,15 @@ void AddActions()
 	// Update
 	actions->update += SceneManager::Update;
 	actions->update += ObjectManager::Update;
+	actions->update += EffectManager::Update;
 
 	// Draw
 	actions->draw += Time::Refresh;
 	actions->draw += ObjectManager::Draw;
 	actions->draw += SceneManager::Draw;
+	actions->draw += EffectManager::Draw;
 }
+
 
 void AppInit()
 {

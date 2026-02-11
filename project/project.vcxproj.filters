@@ -119,6 +119,9 @@
     <ClCompile Include="Source\ActionGameObject.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EffectManager.cpp">
+      <Filter>EffectManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -267,6 +270,9 @@
     <ClInclude Include="Source\ActionGameObject.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EffectManager.h">
+      <Filter>EffectManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -322,6 +328,9 @@
     </Filter>
     <Filter Include="PlayScene\Camera">
       <UniqueIdentifier>{6beecdb6-4f4b-4c15-b57c-ddb00a34c15c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EffectManager">
+      <UniqueIdentifier>{aaa01856-a330-426e-a3a2-1428a43401d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

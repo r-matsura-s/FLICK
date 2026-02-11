@@ -12,4 +12,9 @@ public:
 
 	void Update() override;
 	void Draw() override;
+
+	void DrawBackImage() const;
+	int back_image_ = -1;
+
+	float scene_time_ = 0.0f;
 };

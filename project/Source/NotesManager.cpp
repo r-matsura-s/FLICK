@@ -9,6 +9,7 @@
 #include <fstream>
 #include "ResultDataConnector.h"
 #include "ActionEvent.h"
+#include "EffectManager.h"
 
 #undef max
 #undef min
@@ -117,41 +118,7 @@ NotesManager::NotesManager()
 {
 	sound_manager_ = SoundManager::Instance();
 
-	//オミット(2025/10/31)
-	#pragma region //ライン配置
-	/*
-
-	NotesLine* line_1 = new NotesLine(Color::Red());
-	NotesLine* line_2 = new NotesLine(Color::Green());
-	
-	Notes* prev_tap_1 = nullptr;
-	Notes* prev_tap_2 = nullptr;
-	for (Notes* note : notes_list_)
-	{
-		switch (note->Type())
-		{
-		case NotesType::TAP_1:
-			line_1->SetStartTime(note->ArriveTime());
-			if (prev_tap_1 != nullptr)
-			{
-				line_1->Push(NotesLine::Node(prev_tap_1->Position(), note->Position()));
-			}
-			prev_tap_1 = note;
-			continue;
-		
-		case NotesType::TAP_2:
-			line_2->SetStartTime(note->ArriveTime());
-			if (prev_tap_2 != nullptr)
-			{
-				line_2->Push(NotesLine::Node(prev_tap_2->Position(), note->Position()));
-			}
-			prev_tap_2 = note;
-			continue;
-		}
-	}
-
-	// */
-	#pragma endregion 
+	EffectManager::LoadResource("note_tap");
 
 	combo_count_ = 0;
 	//is_auto_play_ = true;
@@ -721,6 +688,7 @@ void NotesManager::OnJudged(Notes* note, JudgeResult result)
 
 	// ノーツ音の再生
 	note->PlayTapSE();
+	EffectManager::Play("note_tap", note->GetTransform());
 
 	note->finish_action_.Invoke((int)result);
 }

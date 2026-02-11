@@ -1,6 +1,7 @@
 #pragma once
 #include "../Library/GameObject.h"
 #include "ActionEvent.h"
+#include "../Library/Transform.h"
 
 class SoundManager;
 
@@ -40,6 +41,9 @@ public:
 
 	void SetJudged(bool judged);
 	inline void SetHighSpin(float hs_rate) { high_spin_rate_ = hs_rate; }
+
+	// transformに変換する
+	Transform GetTransform() const;
 
 	// ホールド用
 	inline void SetHoldStarted(bool started) { hold_started_ = started; }

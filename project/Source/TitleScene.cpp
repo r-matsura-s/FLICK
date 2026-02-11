@@ -16,14 +16,16 @@ namespace
 		Color(0.8f, 0.8f, 0.0f),
 		Color(0.8f, 0.4f, 0.8f),
 	};
+
+	const float LOGO_ANIM_SPEED = 4.5f;
 }
+
 float OutQuint(float begin, float end, float x);
 float OutQuint(float begin, float end, float x) {
 	if (x > 1.0f) {
 		x = 1.0f - (x - 1.0f);
-		//return x * x * x * x;
 	}
-	return begin + (end - begin) * (1.0f - std::powf(1.0f - x, 5)); 
+	return begin + (end - begin) * (1.0f - std::powf(1.0f - x, 5.0f)); 
 }
 
 
@@ -75,10 +77,10 @@ void TitleScene::Update()
 	switch (state_)
 	{
 	case TitleState::TITLE_LOGO:
-		logo_scale_rate_ += Time::DeltaTime();
+		logo_scale_rate_ += Time::DeltaTimePlane() * LOGO_ANIM_SPEED;
 		if (logo_scale_rate_ > 2.0f)
 		{
-			logo_scale_rate_ = 0.0f;
+			logo_scale_rate_ -= 2.0f;
 		}
 
 		if (input.GetButtonDown(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_SPACE))

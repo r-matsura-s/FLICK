@@ -8,8 +8,8 @@
 
 namespace
 {
-	static const Vector3 CAMERA_DEFAULT_POSITION = Vector3(0.0f, 550.0f, -550.0f);
-	static const float CAMERA_DEFAULT_ANGLE = 35.0f;
+	static const Vector3 CAMERA_DEFAULT_POSITION = Vector3(0.0f, 620.0f, -550.0f);
+	static const float CAMERA_DEFAULT_ANGLE = 36.0f;
 
 	static const float BACKGROUND_ROTATE_SPEED = 0.00015f * DegToRad;
 }

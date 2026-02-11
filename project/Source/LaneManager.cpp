@@ -14,8 +14,8 @@ namespace
 	static const float LINE_LENGTH = 485.0f;
 	static const int JUDGE_LINE_COLOR = 0xFF7F27;
 
-	static const float SIDE_WALL_HEIGHT = 200.0f;
-	static const float SIDE_WALL_SCROLL_SPEED = 0.8f;
+	static const float SIDE_WALL_HEIGHT = 240.0f;
+	static const float SIDE_WALL_SCROLL_SPEED = 0.5f;
 }
 
 #pragma region staticä÷òA
@@ -114,10 +114,10 @@ void LaneManager::DrawSideWall()
 	// í∏ì_èÓïÒ
 	VERTEX3D side_wall[6] =
 	{
-		GetVertex3D(LaneLeapPosition(horizontal, -8.0f) + height,	norm, tex_color, Color::White(), Vector2(0.0f, 0.0f + side_wall_scroll_), Vector2::Zero()),
-		GetVertex3D(LaneLeapPosition(horizontal, -8.0f),			norm, tex_color, Color::White(), Vector2(0.0f, 1.0f + side_wall_scroll_), Vector2::Zero()),
+		GetVertex3D(LaneLeapPosition(horizontal, -1.0f) + height,	norm, tex_color, Color::White(), Vector2(0.0f, 0.0f + side_wall_scroll_), Vector2::Zero()),
+		GetVertex3D(LaneLeapPosition(horizontal, -1.0f),			norm, tex_color, Color::White(), Vector2(0.0f, 1.0f + side_wall_scroll_), Vector2::Zero()),
 		GetVertex3D(LaneLeapPosition(horizontal,  8.0f) + height,	norm, tex_color, Color::White(), Vector2(1.0f, 0.0f + side_wall_scroll_), Vector2::Zero()),
-		GetVertex3D(LaneLeapPosition(horizontal, -8.0f),			norm, tex_color, Color::White(), Vector2(0.0f, 1.0f + side_wall_scroll_), Vector2::Zero()),
+		GetVertex3D(LaneLeapPosition(horizontal, -1.0f),			norm, tex_color, Color::White(), Vector2(0.0f, 1.0f + side_wall_scroll_), Vector2::Zero()),
 		GetVertex3D(LaneLeapPosition(horizontal,  8.0f),			norm, tex_color, Color::White(), Vector2(1.0f, 1.0f + side_wall_scroll_), Vector2::Zero()),
 		GetVertex3D(LaneLeapPosition(horizontal,  8.0f) + height,	norm, tex_color, Color::White(), Vector2(1.0f, 0.0f + side_wall_scroll_), Vector2::Zero()),
 	};
@@ -127,12 +127,12 @@ void LaneManager::DrawSideWall()
 
 	//norm = Vector3(-1.0f, 0.0f, -0.1f).Normalize();
 	horizontal = 1.0f;
-	side_wall[0].pos = LaneLeapPosition(horizontal, -8.0f) + height;	side_wall[0].norm = norm;
-	side_wall[1].pos = LaneLeapPosition(horizontal, -8.0f);				side_wall[1].norm = norm;
-	side_wall[2].pos = LaneLeapPosition(horizontal, 8.0f) + height;	side_wall[2].norm = norm;
-	side_wall[3].pos = LaneLeapPosition(horizontal, -8.0f);				side_wall[3].norm = norm;
-	side_wall[4].pos = LaneLeapPosition(horizontal, 8.0f);				side_wall[4].norm = norm;
-	side_wall[5].pos = LaneLeapPosition(horizontal, 8.0f) + height;	side_wall[5].norm = norm;
+	side_wall[0].pos = LaneLeapPosition(horizontal, -1.0f) + height;	side_wall[0].norm = norm;
+	side_wall[1].pos = LaneLeapPosition(horizontal, -1.0f);				side_wall[1].norm = norm;
+	side_wall[2].pos = LaneLeapPosition(horizontal,  8.0f) + height;	side_wall[2].norm = norm;
+	side_wall[3].pos = LaneLeapPosition(horizontal, -1.0f);				side_wall[3].norm = norm;
+	side_wall[4].pos = LaneLeapPosition(horizontal,  8.0f);				side_wall[4].norm = norm;
+	side_wall[5].pos = LaneLeapPosition(horizontal,  8.0f) + height;	side_wall[5].norm = norm;
 
 	// âE
 	DrawPolygon3D(side_wall, 2, side_wall_image_, TRUE);

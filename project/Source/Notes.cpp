@@ -409,3 +409,18 @@ void Notes::UpdateVerticalPos()
 	position_.z = LaneLeapVerticalRate(arrive_time_ - current_time_) * high_spin_rate_;
 	end_position_.z = LaneLeapVerticalRate(hold_end_time_ - current_time_) * high_spin_rate_;
 }
+
+Transform Notes::GetTransform() const
+{
+	Transform ret;
+	if (type_ == NotesType::HOLD_1 || type_ == NotesType::HOLD_2)
+	{
+		ret.SetPosition(start_position_);
+	}
+	else
+	{
+		ret.SetPosition(position_);
+	}
+
+	return ret;
+}
