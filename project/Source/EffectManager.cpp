@@ -20,16 +20,30 @@ namespace
 
 void EffectManager::Init() 
 {
+    SetUseDirect3DVersion(DX_DIRECT3D_11);
+    SetUseZBuffer3D(TRUE);
+    SetWriteZBuffer3D(TRUE);
+
     // Effekseerの初期化（最大表示数は適宜調整してください）
     if (Effekseer_Init(2000) == -1) 
     {
         printfDx("Effekseerの初期化に失敗しました。\n");
     }
-
-    // DxLibの描画設定と同期
+    
+    // ゆがみ設定
     Effekseer_InitDistortion();
-    //SetUseZBuffer3D(TRUE);
-    //SetWriteZBuffer3D(TRUE);
+
+    // フルスクリーンウインドウの切り替えでリソースが消えるのを防ぐ。
+    // Effekseerを使用する場合は必ず設定する。
+    SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
+
+    // DXライブラリのデバイスロストした時のコールバックを設定する。
+    // ウインドウとフルスクリーンの切り替えが発生する場合は必ず実行する。
+    // ただし、DirectX11を使用する場合は実行する必要はない。
+    Effekseer_SetGraphicsDeviceLostCallbackFunctions();
+
+    // Effekseerに2D描画の設定をする。(2Dのみ)
+    Effekseer_Set2DSetting(Screen::WIDTH, Screen::HEIGHT);
 
     // managerインスタンス生成
     self_ = new Handlers();
@@ -66,7 +80,12 @@ void EffectManager::Update()
 
 void EffectManager::Draw() 
 {
+    // DXライブラリのカメラとEffekseerのカメラを同期する。
+    Effekseer_Sync3DSetting();
+
+    // Effekseerにより再生中のエフェクトを描画する。
     DrawEffekseer3D();
+    DrawEffekseer2D();
 }
 
 void EffectManager::LoadResource(const std::string& name, float scale) 
@@ -74,8 +93,8 @@ void EffectManager::LoadResource(const std::string& name, float scale)
     // 既に読み込まれている場合はスキップ
     if (self_->resources.find(name) != self_->resources.end()) return;
 
-    // ファイルパスを生成（例：Resources/Effect/name.efkefc）
-    std::string path = "data/effect/" + name + ".efkefc";
+    // ファイルパスを生成（例：Resources/Effect/name.efk）
+    std::string path = "data/effect/" + name + ".efk";
     int resourceHandle = LoadEffekseerEffect(path.c_str(), scale);
     if (resourceHandle != -1) 
     {

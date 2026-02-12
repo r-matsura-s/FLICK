@@ -10,6 +10,7 @@
 #include "ResultDataConnector.h"
 #include "ActionEvent.h"
 #include "EffectManager.h"
+#include "ActionGameObject.h"
 
 #undef max
 #undef min
@@ -27,6 +28,8 @@ namespace
 	static const float HEALING_NOTE_RADIUS = 0.3f;
 
 	static const int READY_COUNT = 4;
+
+	static const float EFFECT_SCALE = 13.0f;
 }
 
 // キー配置はここ
@@ -118,7 +121,7 @@ NotesManager::NotesManager()
 {
 	sound_manager_ = SoundManager::Instance();
 
-	EffectManager::LoadResource("note_tap");
+	EffectManager::LoadResource("note_tap", EFFECT_SCALE);
 
 	combo_count_ = 0;
 	//is_auto_play_ = true;
@@ -170,11 +173,12 @@ void NotesManager::Draw()
 	// コンボ数が1以上のときのみ表示
 	if (combo_count_ != 0) 
 	{
-		Renderer::Text(Vector2(-100, -300), Color::White(), "COMBO:" + std::to_string(combo_count_));
+		Renderer::Text(Vector2(-600, -40), Color::White(), "COMBO:" + std::to_string(combo_count_));
 	}
 
-	result_data_->DrawScore(Vector2(-300, -300));
-	Renderer::Text(Vector2(400, -300), Color::White(), meta_data_.title_);
+	result_data_->DrawScore(Vector2(-600, -300));
+	
+	Renderer::Text(Vector2(400, -350), Color::White(), meta_data_.title_);
 
 #if _DEBUG
 	if (is_auto_play_)
@@ -298,12 +302,10 @@ void NotesManager::UpdateStatePlay()
 	{
 		ChangeState(InGameState::FINISH);
 	}
-#if _DEBUG
-	if (CheckHitKey(KEY_INPUT_Q))
+	if (CheckHitKey(KEY_INPUT_1))
 	{
 		ChangeState(InGameState::FINISH);
 	}
-#endif
 }
 
 void NotesManager::UpdateStatePause()

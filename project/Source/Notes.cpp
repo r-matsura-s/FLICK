@@ -415,12 +415,13 @@ Transform Notes::GetTransform() const
 	Transform ret;
 	if (type_ == NotesType::HOLD_1 || type_ == NotesType::HOLD_2)
 	{
-		ret.SetPosition(start_position_);
+		ret.SetPosition(position_);
 	}
 	else
 	{
 		ret.SetPosition(position_);
 	}
 
+	ret.position.z = 0.0f;
 	return ret;
 }

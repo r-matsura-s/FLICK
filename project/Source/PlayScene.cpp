@@ -26,8 +26,8 @@ void PlayScene::Update()
 void PlayScene::Draw()
 {
 	//*
-	DrawString(0, 0, "PLAY SCENE", GetColor(255, 255, 255));
-	DrawFormatString(100, 100, GetColor(255, 255, 255), "fps_%f", Time::GetFPS());
-	DrawString(100, 400, "Push [T]Key To Title", GetColor(255, 255, 255));
+	//DrawString(0, 0, "PLAY SCENE", GetColor(255, 255, 255));
+	DrawFormatString(0, 0, 0xffffff, "fps:%.0f", Time::GetFPS());
+	//DrawString(100, 400, "Push [T]Key To Title", GetColor(255, 255, 255));
 	// */
 }

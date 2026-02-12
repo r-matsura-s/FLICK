@@ -3,9 +3,9 @@
 namespace
 {
 	// ‚Ğ‚Ë‚è‰ñ“]‚ÌÅ‘åŠp“x(deg)
-	static constexpr float TWIST_MAX = 4.0f;
+	static constexpr float TWIST_MAX = 3.0f;
 	// ‚Ğ‚Ë‚è‚Ì•âŠÔŠÔ(•b)
-	static constexpr float TWIST_TIME = 0.6f;
+	static constexpr float TWIST_TIME = 1.0f;
 	// ‚Ğ‚Ë‚è‚ÌŒ¸Š(*=)
 	static constexpr float TWIST_FACTOR = 0.86f;
 }

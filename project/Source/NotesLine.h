@@ -31,6 +31,6 @@ private:
 	std::vector<Node> position_list_;
 	Vector3 base_position_;
 	float current_time_ = 0.0f;
-	float* arrive_time_;
+	float* arrive_time_ = nullptr;
 	int color_ = 0x00ffff;
 };

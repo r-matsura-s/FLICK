@@ -118,7 +118,7 @@ void TitleScene::Draw()
 	case TitleState::SELECT_MUSIC:
 		music_select_manager_->Draw();
 		
-		Renderer::SetBlendMode_Alpha((int)(255.0f * 0.6));
+		Renderer::SetBlendMode_Alpha((int)(255.0f * 0.6f));
 		SetDrawBright((int)(current_fog_.r * 255.0f), (int)(current_fog_.g * 255.0f), (int)(current_fog_.b * 255.0f));
 		DrawGraph(0, 0, side_fade_image_, TRUE);
 		SetDrawBright(255, 255, 255);
@@ -128,11 +128,11 @@ void TitleScene::Draw()
 		break;
 	}
 
-	extern const char* Version();
-	DrawString(0, 20, Version(), GetColor(255,255,255));
-	DrawString(0, 0, "TITLE SCENE", GetColor(255,255,255));
-	DrawFormatString(100, 100, GetColor(255,255,255), "fps_%f", 1.0f / Time::DeltaTimePlane());
-	DrawString(100, 400, "Push [P]Key To Play", GetColor(255, 255, 255));
+	//extern const char* Version();
+	//DrawString(0, 20, Version(), GetColor(255,255,255));
+	//DrawString(0, 0, "TITLE SCENE", GetColor(255,255,255));
+	//DrawFormatString(100, 100, GetColor(255,255,255), "fps_%f", 1.0f / Time::DeltaTimePlane());
+	//DrawString(100, 400, "Push [P]Key To Play", GetColor(255, 255, 255));
 }
 
 void TitleScene::UpdateFog()
